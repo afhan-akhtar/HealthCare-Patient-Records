@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Demo App",
+    "footer": "Tab Next Limited"
+  },
+  "api": {
+    "his": "https://localhost:7269/"
+  },
+  "cache": false,
+  "debug": false
+}

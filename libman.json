@@ -1,0 +1,181 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "core-js-bundle@3.30.0",
+      "destination": "wwwroot/lib/core-js-bundle/",
+      "files": [
+        "minified.js"
+      ]
+    },
+    {
+      "library": "fetch-polyfill@0.8.2",
+      "destination": "wwwroot/lib/fetch-polyfill/",
+      "files": [
+        "fetch.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "ie11-custom-properties@4.1.0",
+      "destination": "wwwroot/lib/ie11-custom-properties/",
+      "files": [
+        "ie11CustomProperties.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "vue3-sfc-loader@0.8.4",
+      "destination": "wwwroot/lib/vue3-sfc-loader/",
+      "files": [
+        "dist/vue2-sfc-loader.min.js"
+      ]
+    },
+    {
+      "library": "axios@1.3.5",
+      "destination": "wwwroot/lib/axios/",
+      "files": [
+        "dist/axios.min.js"
+      ]
+    },
+    {
+      "library": "moment@2.29.4",
+      "destination": "wwwroot/lib/moment/",
+      "files": [
+        "min/moment.min.js"
+      ]
+    },
+    {
+      "library": "jwt-decode@3.1.2",
+      "destination": "wwwroot/lib/jwt-decode/",
+      "files": [
+        "build/jwt-decode.js"
+      ]
+    },
+    {
+      "library": "vue@2.7.14",
+      "destination": "wwwroot/lib/vue/",
+      "files": [
+        "dist/vue.min.js"
+      ]
+    },
+    {
+      "library": "vue-cookies@1.8.3",
+      "destination": "wwwroot/lib/vue-cookies/",
+      "files": [
+        "vue-cookies.js"
+      ]
+    },
+    {
+      "library": "vue-router@3.6.5",
+      "destination": "wwwroot/lib/vue-router/",
+      "files": [
+        "dist/vue-router.min.js"
+      ]
+    },
+    {
+      "library": "vuetify@2.6.14",
+      "destination": "wwwroot/lib/vuetify/",
+      "files": [
+        "dist/vuetify.min.css",
+        "dist/vuetify.min.js"
+      ]
+    },
+    {
+      "library": "@mdi/font@7.2.96",
+      "destination": "wwwroot/lib/mdi/font/",
+      "files": [
+        "fonts/materialdesignicons-webfont.eot",
+        "fonts/materialdesignicons-webfont.ttf",
+        "fonts/materialdesignicons-webfont.woff",
+        "fonts/materialdesignicons-webfont.woff2",
+        "css/materialdesignicons.min.css"
+      ]
+    },
+    {
+      "library": "vuedraggable@2.24.3",
+      "destination": "wwwroot/lib/vuedraggable/",
+      "files": [
+        "dist/vuedraggable.umd.min.js"
+      ]
+    },
+    {
+      "library": "sortablejs@1.15.0",
+      "destination": "wwwroot/lib/sortablejs/",
+      "files": [
+        "Sortable.min.js"
+      ]
+    },
+    {
+      "library": "vue-the-mask@0.11.1",
+      "destination": "wwwroot/lib/vue-the-mask/",
+      "files": [
+        "dist/vue-the-mask.js"
+      ]
+    },
+    {
+      "library": "mathjs@10.6.4",
+      "destination": "wwwroot/lib/mathjs/",
+      "files": [
+        "lib/browser/math.js"
+      ]
+    },
+    {
+      "library": "chart.js@3.9.1",
+      "destination": "wwwroot/lib/chart.js/",
+      "files": [
+        "dist/chart.min.js"
+      ]
+    },
+    {
+      "library": "@ckeditor/ckeditor5-vue2@3.0.1",
+      "destination": "wwwroot/lib/ckeditor/ckeditor5-vue2/",
+      "files": [
+        "dist/ckeditor.js"
+      ]
+    },
+    {
+      "library": "@ckeditor/ckeditor5-build-classic@35.4.0",
+      "destination": "wwwroot/lib/ckeditor/ckeditor5-build-classic/",
+      "files": [
+        "build/ckeditor.js"
+      ]
+    },
+    {
+      "library": "markerjs2@2.29.4",
+      "destination": "wwwroot/lib/markerjs2"
+    },
+    {
+      "library": "@ckeditor/ckeditor5-basic-styles@38.1.0",
+      "destination": "wwwroot/lib/ckeditor/ckeditor5-basic-styles",
+      "files": [
+        "build/basic-styles.js"
+      ]
+    },
+    {
+      "library": "@ckeditor/ckeditor5-essentials@38.1.0",
+      "destination": "wwwroot/lib/ckeditor/ckeditor5-essentials",
+      "files": [
+        "build/essentials.js"
+      ]
+    },
+    {
+      "library": "vue-infinite-scroll@^2.0.2",
+      "destination": "wwwroot/lib/vue-infinite-scroll",
+      "files": [
+        "vue-infinite-scroll.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "pdfjs-dist@3.10.111",
+      "destination": "wwwroot/lib/pdfjs-dist"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "js-base64@3.7.5",
+      "destination": "wwwroot/lib/js-base64"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Frontend Quiz",
+    "footer": "Tab Next Limited"
+  },
+  "api": {
+    "his": "https://webdev.tabnext.asia/api/FrontendInterview"
+  },
+  "cache": false,
+  "debug": false
+}

@@ -1,0 +1,429 @@
+﻿/* @import '~vuetify/src/styles/styles.sass'; */
+
+@font-face {
+  font-family: 'Inter';
+  src: url(./js/fonts/Inter/Inter-Regular.ttf) format('truetype');
+}
+
+html {
+  letter-spacing: 0 !important;
+
+  @media (min-width: 800px) {
+    font-size: 20px;
+  }
+}
+
+html {
+  @media (min-width: 800px) {
+    font-size: 18px;
+    font-family: 'Inter';
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.container-fluid-max {
+  max-width: 100%;
+}
+
+.f32 {
+  font-size: 32px !important;
+}
+.f26 {
+  font-size: 26px !important;
+}
+
+.f24 {
+  font-size: 24px !important;
+}
+
+.f22 {
+  font-size: 22px !important;
+}
+
+.f20 {
+  font-size: 20px !important;
+}
+
+.f18 {
+  font-size: 18px !important;
+}
+
+.f16 {
+  font-size: 16px !important;
+}
+
+.f14 {
+  font-size: 14px !important;
+}
+
+.f12 {
+  font-size: 12px !important;
+}
+
+.f10 {
+  font-size: 10px !important;
+}
+
+.w700 {
+  font-weight: 700 !important;
+}
+
+.w600 {
+  font-weight: 600 !important;
+}
+
+.w500 {
+  font-weight: 500 !important;
+}
+
+.w400 {
+  font-weight: 400 !important;
+}
+
+body {
+  font-family: 'Inter';
+  color: #333333;
+  letter-spacing: 0 !important;
+}
+
+/* font-family */
+code,
+kbd,
+pre,
+samp,
+.v-application {
+  font-family: 'Inter';
+}
+
+.v-application .display-3,
+.v-application .display-4,
+.v-application .display-1,
+.v-application .display-2,
+.v-application .headline,
+.v-application .title,
+.v-application .subtitle-2,
+.v-application .body-2,
+.v-application .subtitle-1,
+.v-application .body-1,
+.v-application .caption,
+.v-application .overline,
+.v-application .text-h1,
+.v-application .text-h2,
+.v-application .text-h3,
+.v-application .text-h4,
+.v-application .text-h5,
+.v-application .text-h6,
+.v-application .text-subtitle-1,
+.v-application .text-subtitle-2,
+.v-application .text-body-1,
+.v-application .text-body-2,
+.v-application .text-button,
+.v-application .text-caption,
+.v-application .text-overline,
+.v-application .text-sm-h1,
+.v-application .text-sm-h2,
+.v-application .text-sm-h3,
+.v-application .text-sm-h4,
+.v-application .text-sm-h5,
+.v-application .text-sm-h6,
+.v-application .text-sm-subtitle-1,
+.v-application .text-sm-subtitle-2,
+.v-application .text-sm-body-1,
+.v-application .text-sm-body-2,
+.v-application .text-sm-button,
+.v-application .text-sm-caption,
+.v-application .text-sm-overline,
+.v-application .text-md-h1,
+.v-application .text-md-h2,
+.v-application .text-md-h3,
+.v-application .text-md-h4,
+.v-application .text-md-h5,
+.v-application .text-md-h6,
+.v-application .text-md-subtitle-1,
+.v-application .text-md-subtitle-2,
+.v-application .text-md-body-1,
+.v-application .text-md-body-2,
+.v-application .text-md-button,
+.v-application .text-md-caption,
+.v-application .text-md-overline,
+.v-application .text-lg-h1,
+.v-application .text-lg-h2,
+.v-application .text-lg-h3,
+.v-application .text-lg-h4,
+.v-application .text-lg-h5,
+.v-application .text-lg-h6,
+.v-application .text-lg-subtitle-1,
+.v-application .text-lg-subtitle-2,
+.v-application .text-lg-body-1,
+.v-application .text-lg-body-2,
+.v-application .text-lg-button,
+.v-application .text-lg-caption,
+.v-application .text-lg-overline,
+.v-application .text-xl-h1,
+.v-application .text-xl-h2,
+.v-application .text-xl-h3,
+.v-application .text-xl-h4,
+.v-application .text-xl-h5,
+.v-application .text-xl-h6,
+.v-application .text-xl-subtitle-1,
+.v-application .text-xl-subtitle-2,
+.v-application .text-xl-body-1,
+.v-application .text-xl-body-2,
+.v-application .text-xl-button,
+.v-application .text-xl-caption,
+.v-application .text-xl-overline {
+  font-family: 'Inter' !important;
+}
+
+/* Remove Material Letter Spacing on buttons */
+.v-btn {
+  letter-spacing: 0px !important;
+}
+
+/* primary text color */
+.v-application .theme--light.heading,
+.theme--light.v-application,
+.theme--light.v-application .text--primary,
+.theme--light.v-sheet,
+.theme--light.v-image,
+.theme--light.v-btn,
+.theme--light.v-text-field:not(.v-input--has-state):hover > .v-input__control > .v-input__slot:before,
+.theme--dark.v-text-field--solo-inverted.v-input--is-focused > .v-input__control > .v-input__slot input,
+.theme--light.v-select .v-select__selections,
+.theme--dark.v-select.v-text-field--solo-inverted.v-input--is-focused .v-select__selections,
+.theme--light.v-input,
+.theme--light.v-input input,
+.theme--light.v-input textarea,
+.theme--light.v-progress-linear,
+.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled),
+.theme--light.v-list,
+.theme--light.v-chip,
+.theme--light.v-bottom-navigation,
+.theme--light.v-overlay,
+.theme--light.v-btn-toggle:not(.v-btn-toggle--group),
+.theme--light.v-card,
+.theme--light.v-color-picker .v-color-picker__input input,
+.theme--light.v-data-table .v-data-table-header th.sortable.active,
+.theme--light.v-data-table .v-data-table-header th.sortable.active .v-data-table-header__icon,
+.theme--light.v-data-table .v-data-table-header th.sortable:hover,
+.theme--light.v-data-table .v-data-table-header__sort-badge,
+.theme--light.v-data-table,
+.theme--light.v-date-picker-header
+  .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
+  button:not(:hover):not(:focus),
+.theme--light.v-expansion-panels .v-expansion-panel,
+.theme--light.v-file-input .v-file-input__text,
+.theme--light.v-footer,
+.theme--light.v-pagination .v-pagination__item,
+.theme--light.v-snack__wrapper,
+.theme--light.v-stepper .v-stepper__step--complete .v-stepper__label,
+.theme--light.v-treeview {
+  color: #333333;
+}
+
+.theme--light.v-application .text--primary,
+.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+  color: #333333 !important;
+}
+
+/* secondary text color */
+.theme--light.v-application .text--secondary,
+.theme--dark.v-text-field--solo-inverted.v-input--is-focused > .v-input__control > .v-input__slot .v-label,
+.theme--light.v-label,
+.theme--light.v-messages,
+.theme--light.v-counter,
+.theme--light.v-list-item:not(.v-list-item--disabled) .v-list-item__action-text,
+.theme--light.v-list-item:not(.v-list-item--disabled) .v-list-item__subtitle,
+.theme--light.v-subheader,
+.theme--light.v-bottom-navigation .v-btn:not(.v-btn--active),
+.theme--light.v-card > .v-card__subtitle,
+.theme--light.v-card > .v-card__text,
+.theme--light.v-color-picker span,
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr > th,
+.theme--light.v-file-input .v-file-input__text--placeholder,
+.theme--light.v-stepper--non-linear
+  .v-stepper__step:not(.v-stepper__step--complete):not(.v-stepper__step--error)
+  .v-stepper__label,
+.theme--light.v-stepper .v-stepper__label small,
+.theme--light.v-system-bar,
+.theme--light.v-system-bar .v-icon {
+  color: #333333;
+}
+
+.theme--light.v-application .text--secondary,
+.theme--light.v-bottom-navigation .v-btn:not(.v-btn--active) {
+  color: #333333 !important;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > td,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.hollowBtnStyle {
+  border-radius: 15px;
+  border: 1px solid #4080df;
+  color: #4080df;
+  height: 40px;
+}
+
+.btnWithRadius {
+  border-radius: 15px;
+  height: 40px;
+}
+
+@media (min-width: 200px) {
+  .titleResponsive {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .titleResponsive {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .titleResponsive {
+    font-size: 39px;
+  }
+}
+
+.v-pagination__item {
+  border-radius: 12px;
+  color: white !important;
+}
+
+.v-pagination__item:not(.v-pagination__item--active) {
+  background: #f7fbfd !important;
+  color: var(--v-primaryBlue-base) !important;
+}
+
+.select-div > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div > i {
+  color: var(--v-coreWhite) !important;
+}
+
+/* Finally we can have custom height for Veutify Text Field */
+.thin-text-field .v-input__control .v-input__slot {
+  align-items: center !important;
+}
+
+.thin-text-field .v-input__control .v-input__slot > .v-input__append-inner {
+  align-self: center;
+}
+.thin-text-field .v-input__control .v-input__slot > .v-input__prepend-inner {
+  align-self: center !important;
+  padding-top: 0;
+  margin-top: 0 !important;
+}
+
+.border-text-field-grey .v-input__control .v-input__slot {
+  border: 1px solid var(--v-lightGray3) !important;
+}
+
+.rounded-15 {
+  border-radius: 15px !important;
+}
+
+.rounded-7 {
+  border-radius: 7px !important;
+}
+
+.thin-grey-border {
+  border: 1px solid var(--v-lightGray3) !important;
+}
+
+.border-thin-orange {
+  border: 1px solid var(--v-coreOrange) !important;
+}
+
+button {
+  letter-spacing: 0 !important;
+}
+
+.v-btn {
+  letter-spacing: 0 !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Table Predefined Styles */
+.table-style-1 > .v-data-table__wrapper > table {
+  border-collapse: separate;
+  border-spacing: 0 3px;
+}
+
+.table-style-1 > .v-data-table__wrapper > table > tbody > tr > td {
+  background-color: var(--v-lightGray);
+}
+.table-style-1 > .v-data-table__wrapper > table > thead > tr > th {
+  color: var(--v-lighGray4) !important;
+}
+
+.table-style-1 > .v-data-table__wrapper > table > tbody > tr > td:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.table-style-1 > .v-data-table__wrapper > table > tbody > tr > td:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+a[title='Powered by marker.js'] {
+  display: none !important;
+}
+.__markerjs2__0_toolbar_button {
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.__markerjs2__0_toolbar_button svg {
+  height: 25px !important;
+}
+
+.image-editor-button {
+  background-color: var(--v-coreWhite);
+  color: var(--v-coreGreen);
+}
+.image-editor-button:hover {
+  background-color: var(--v-coreGreen);
+  color: var(--v-coreWhite);
+}
+.image-editor-button-active {
+  background-color: var(--v-coreGreen);
+  color: var(--v-coreWhite);
+}
+
+.image-editor-toolbar {
+  border: 1px solid var(--v-lightGray3);
+  border-radius: 7px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ck-powered-by-balloon {
+  display: none !important;
+}

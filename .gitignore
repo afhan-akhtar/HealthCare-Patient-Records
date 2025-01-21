@@ -1,0 +1,7 @@
+wwwroot/_build.json
+wwwroot/_version.json
+wwwroot/lib/*
+!wwwroot/lib/index.html
+bin/
+obj/
+node_modules/
