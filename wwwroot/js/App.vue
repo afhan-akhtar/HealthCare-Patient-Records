@@ -2,7 +2,7 @@
   <v-app :style="cssProps">
     <template>
       <t-app-header ref="appHeader" @called="called"></t-app-header>
-      <v-main class="container-fluid-max" style="background: var(--v-bkgroundLightGrey-base)">
+      <v-main class="container-fluid-max" style="background: var(--v-bkgroundLightGrey-base);">
         <v-container fluid class="ma-0 pa-0">
           <router-view ref="routerView" @saveBeforeLeave="saveBeforeLeave"></router-view>
         </v-container>
@@ -29,7 +29,7 @@ Vue.use(CKEditor, infiniteScroll)
 
 export default {
   components: {
-    't-app-header': () => import('./components/App/Header.vue'),
+    't-app-header': () => import('./components/App/SideBar.vue'),
   },
   data() {
     return {
