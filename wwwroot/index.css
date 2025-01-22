@@ -39,11 +39,17 @@ html {
 .full-container {
   width: 100%;
   height: 100%; 
-  border: 1px solid #ccc; /* Border around the container */
+
   display: flex;
   flex-direction: column;
 }
+.fullcont{
+    border: 1px solid #ccc; /* Border around the container */
 
+}
+.v-application .ma-0 {
+    margin: 10px !important;
+}
 
 .header {
   display: flex;
@@ -60,8 +66,20 @@ html {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
 }
+.new{
+   background-color: #4080DF !important;
+  color: white !important;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 
+}
+.new:hover{
+   background-color: #4080DF !important;
+}
 .create-btn:hover {
   background-color: #4080DF;
 }
@@ -526,7 +544,189 @@ a[title='Powered by marker.js'] {
    
 }
 
+.theme--light.v-data-table>.v-data-table__wrapper>table>thead>tr:last-child>th {
+    border-bottom: none !important;
+}
+.border-left{
+  border-left: 1px solid #c4c4c4;
+  background-color: #F9F9F9 !important;
+}
 
 
 
+.v-row {
+  margin: 0;
+}
 
+.v-col {
+  display: flex;
+  align-items: center;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.main-border {
+  border: 1px solid #ccc;
+  padding: 16px;
+}
+
+.small-font {
+  font-size: 12px; /* Adjust font size as desired */
+}
+
+.small-font .v-btn,
+.small-font .green-box,
+.small-font div {
+  font-size: 12px; /* Apply small font size to all elements within the container */
+}
+
+.info-block {
+  padding: 0 1rem;
+  background-color: #F9F9F9;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.info-label, .info-value {
+  width: 22%; /* Adjust width as needed */
+}
+
+
+
+.info-value {
+  display: flex;
+  justify-content: start; /* Align values to the start of their respective columns */
+}
+.info-label{
+  font-size: 12px; /* Medium font size */
+  color: #7B7B7B !important;
+}
+ .info-value {
+  font-size: 14px;
+ }
+ .v-sheet{
+  height: 40px !important;
+ }
+
+
+
+.v-navigation-drawer__content {
+    height: 100%;
+    overflow-y: hidden !important;
+    overflow-x: hidden;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+ 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+input, textarea {
+  width: 100%;
+  padding: 8px;
+ 
+  border-radius: 4px;
+}
+textarea {
+  resize: vertical;
+}
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background-color: #218838;
+}
+.save-btn {
+  background-color: #4080DF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.save-btn:hover {
+  background-color: #4080DF;
+}
+.cancel-btn {
+  background-color: white;
+  color: #4080DF;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: 2px solid #4080DF; /* Adding width and style to the outline */
+}
+
+.cancel-btn:hover {
+  background-color: #4080DF;
+}
+
+
+.closed-btn {
+  position: absolute;
+  top: 70%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: #aaa;
+  cursor: pointer;
+  z-index: 2; /* Ensure the icon is above the input */
+}
+.closed-btn:hover {
+  color: #555;
+}

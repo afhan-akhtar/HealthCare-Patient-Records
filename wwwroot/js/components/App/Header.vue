@@ -13,7 +13,7 @@
   >
     <v-col
       class="pe-5 pt-3 d-flex flex-column align-center"
-      style="height: 100%; justify-content: space-between;"
+      style="height: 90%; justify-content: space-between;"
     >
       <!-- Logo Section -->
       <div class="logo-container text-center">

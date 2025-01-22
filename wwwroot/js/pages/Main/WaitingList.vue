@@ -1,11 +1,8 @@
 ﻿<template>
   <div class="pa-4 pt-0 mt-2 full-container">
-    <div class="header pt-2">
-      <span>Patient</span>
-      <button class="create-btn rounded-xl">+ Create Patient</button>
-    </div>
    
-    <v-row class="pa-4">
+   
+    <v-row class="pa-4 pt-0">
       <v-col cols="12">
         <v-card class="pa-2 pt-0 pb-0" outlined>
           <v-text-field
