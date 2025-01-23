@@ -6,17 +6,17 @@
         <v-container fluid class="ma-0 pa-0 fullcont">
           <create-patient />
           <router-view ref="routerView" @saveBeforeLeave="saveBeforeLeave"></router-view>
-           <v-row class="pe-5">
+           <!-- <v-row class="pe-5"> -->
         <!-- Get Patients takes 8 columns -->
-        <v-col cols="12" md="9">
+        <!-- <v-col cols="12" md="9">
           <get-patients />
-        </v-col>
+        </v-col> -->
         
         <!-- Patient Details takes 4 columns -->
-        <v-col cols="12" md="3" class="pt-0">
+        <!-- <v-col cols="12" md="3" class="pt-0">
           <patient-details />
-        </v-col>
-      </v-row>
+        </v-col> -->
+      <!-- </v-row> -->
         </v-container>
       </v-main>
     </template>

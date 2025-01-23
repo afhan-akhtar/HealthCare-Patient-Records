@@ -547,9 +547,9 @@ a[title='Powered by marker.js'] {
 .theme--light.v-data-table>.v-data-table__wrapper>table>thead>tr:last-child>th {
     border-bottom: none !important;
 }
-.border-left{
-  border-left: 1px solid #c4c4c4;
-  background-color: #F9F9F9 !important;
+.border-right{
+  border-right: 1px solid #c4c4c4;
+  
 }
 
 
@@ -571,6 +571,7 @@ a[title='Powered by marker.js'] {
 .main-border {
   border: 1px solid #ccc;
   padding: 16px;
+  background-color: #ffffff !important;
 }
 
 .small-font {
@@ -694,10 +695,11 @@ textarea {
 .save-btn {
   background-color: #4080DF;
   color: white;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+    font-size: 12px;
 }
 .save-btn:hover {
   background-color: #4080DF;
@@ -705,15 +707,19 @@ textarea {
 .cancel-btn {
   background-color: white;
   color: #4080DF;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   outline: 2px solid #4080DF; /* Adding width and style to the outline */
+  font-size: 12px;
 }
 
 .cancel-btn:hover {
-  background-color: #4080DF;
+  background-color: white;
+  outline: 2px solid #4080DF;
+  color: #4080DF;
+
 }
 
 
@@ -729,4 +735,45 @@ textarea {
 }
 .closed-btn:hover {
   color: #555;
+}
+
+.appointment{
+  color: #4080df !important;
+}
+.comingAppointment{
+  background-color: #4080df !important;
+  color: #ffffff !important;
+
+}
+.vip{
+  background-color: #FFC553;
+  color:#ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.pointer{
+  cursor: pointer;
+}
+.pointer:hover{
+  border-color: #4080df !important;
+  border: 2px solid #4080df !important;
+  border-radius: 5px;
+}
+.patientname{
+  font-size: 16px;
+font-weight: 500;
+}
+
+.schedule{
+  width: 120px;
+  color: #4080DF !important;
+  background-color: #ffffff !important;
+  outline: 1px solid #4080DF !important;
+}
+.schedule:hover{
+  width: 120px;
+  color: #4080DF !important;
+  background-color: #ffffff !important;
+  outline: 1px solid #4080DF !important;
 }

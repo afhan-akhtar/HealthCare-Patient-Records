@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <div class="header pt-2 pb-0 mx-4">
+    <div class="header pt-2 pb-0 mx-4 ps-1">
       <span>Patient</span>
       <button class="create-btn rounded-xl" @click="openModal">+ Create Patient</button>
     </div>
@@ -22,7 +22,7 @@
 <div class="form-group row">
   <!-- Dropdown (Select) in col-4 with dropdown icon inside input -->
   <div class="col-4">
-  <label for="document-type">Document No.</label>
+  <label for="document-type">Document No.<span class="red">*</span></label>
   <div class="position-relative">
     <input
       id="document-type"
@@ -48,7 +48,7 @@
       v-model="form.name" 
       type="text" 
       class="form-control pr-5" 
-      placeholder="Enter Document No."
+      placeholder="Document No"
       required
     />
     <!-- Cross Icon inside Input -->
@@ -62,8 +62,8 @@
 </div>
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
-    <label for="surname">Surname</label>
+  <div class="col-6 ps-0 position-relative">
+    <label for="surname">Surname<span class="red">*</span></label>
     <input 
       id="surname" 
       v-model="form.surname" 
@@ -72,6 +72,14 @@
       placeholder="Surname"
       required 
     />
+     <!-- Cross Icon inside Input -->
+    <span 
+      class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+      @click="form.name = ''"
+    >
+      &times;
+    </span>
+    
   </div>
 
   <div class="col-6">
@@ -88,7 +96,7 @@
 </div>
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
+  <div class="col-6 ps-0">
     <label for="surname">Chinese</label>
     <input 
       id="surname" 
@@ -101,22 +109,22 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">Sex</label>
+    <label for="givenName">Sex<span class="red">*</span></label>
     <div class="tabs" style="display: flex; gap: 10px;">
-      <label class="tab-option" style="cursor: pointer; padding: 10px 20px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'male'}" @click="form.sex = 'male'">Male</label>
-      <label class="tab-option" style="cursor: pointer; padding: 10px 20px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'female'}" @click="form.sex = 'female'">Female</label>
+      <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'male'}" @click="form.sex = 'male'">Male</label>
+      <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'female'}" @click="form.sex = 'female'">Female</label>
     </div>
   </div>
 </div>
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
-    <label for="surname">Date Of Birth</label>
+  <div class="col-6 ps-0">
+    <label for="surname">Date Of Birth<span class="red">*</span></label>
     <input 
       id="surname" 
       v-model="form.surname" 
-      type="text" 
-      class="form-control" 
+      type="date" 
+      class="form-control pe-2" 
       placeholder="DD/M/YY"
       required 
     />
@@ -138,7 +146,7 @@
 
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
+  <div class="col-6 ps-0">
     <label for="surname">Nationality</label>
     <input 
       id="surname" 
@@ -165,8 +173,8 @@
 
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
-    <label for="surname">Mobile</label>
+  <div class="col-6 ps-0">
+    <label for="surname">Mobile<span class="red">*</span></label>
     <input 
       id="surname" 
       v-model="form.surname" 
@@ -192,13 +200,13 @@
 
 <div style="display: flex; justify-content: space-between;">
   <h3>Address</h3>
-  <button>Edit Address</button>
+  <button type="submit" class="save-btn ms-2 rounded-xl">Edit Address</button>
 </div>
 
     
                <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
-    <label for="surname">Patient Address</label>
+  <div class="col-6 ps-0">
+    <label for="surname">Patient Address<span class="red">*</span></label>
     <input 
       id="surname" 
       v-model="form.surname" 
@@ -210,7 +218,7 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">Mailing Address</label>
+    <label for="givenName">Mailing Address<span class="red">*</span></label>
     <input 
       id="givenName" 
       v-model="form.givenName" 
@@ -223,7 +231,7 @@
 </div>
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
+  <div class="col-6 ps-0">
     <label for="surname">Remarks</label>
     <input 
       id="surname" 
@@ -256,7 +264,7 @@
 
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6">
+  <div class="col-6 ps-0">
     <label for="surname">Mailing List</label>
     <input 
       id="surname" 
@@ -306,47 +314,47 @@
 <div class="row d-flex align-start">
   <!-- Kin 1 Section -->
   <div class="col-4">
-    <h4>Next of Kin 1</h4>
-    <div class="form-group">
-      <label for="kin1-name">Name:</label>
+    <h6>Next of Kin 1</h6>
+    <div class="form-group mb-2">
+      
       <input 
         id="kin1-name" 
         v-model="form.kin1Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 1 Name"
+        placeholder="Enter Kin Name"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin1-contact">Contact Number:</label>
+    <div class="form-group mb-2">
+  
       <input 
         id="kin1-contact" 
         v-model="form.kin1Contact" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 1 Contact Number"
+        placeholder="Contact Number"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin1-relation">Relation:</label>
+    <div class="form-group mb-2">
+   
       <input 
         id="kin1-relation" 
         v-model="form.kin1Relation" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 1 Relation"
+        placeholder="Relation"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin1-address">Sms:</label>
+    <div class="form-group mb-2">
+     
       <textarea 
         id="kin1-address" 
         v-model="form.kin1Address" 
         class="form-control" 
-        placeholder="Enter Kin 1 Address"
+        placeholder="Remarks"
         required
       ></textarea>
     </div>
@@ -354,47 +362,47 @@
 
   <!-- Kin 2 Section -->
   <div class="col-4">
-    <h4>Next of Kin 2</h4>
-    <div class="form-group">
-      <label for="kin2-name">Name:</label>
+    <h6>Next of Kin 2</h6>
+    <div class="form-group mb-2">
+ 
       <input 
         id="kin2-name" 
         v-model="form.kin2Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 2 Name"
+        placeholder="Enter Kin Name"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin2-contact">Contact Number:</label>
+    <div class="form-group mb-2">
+      
       <input 
         id="kin2-contact" 
         v-model="form.kin2Contact" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 2 Contact Number"
+        placeholder="Contact Number"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin2-relation">Relation:</label>
+    <div class="form-group mb-2">
+  
       <input 
         id="kin2-relation" 
         v-model="form.kin2Relation" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 2 Relation"
+        placeholder="Relation"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin2-address">Sms:</label>
+    <div class="form-group mb-2">
+      
       <textarea 
         id="kin2-address" 
         v-model="form.kin2Address" 
         class="form-control" 
-        placeholder="Enter Kin 2 Address"
+        placeholder="Remarks"
         required
       ></textarea>
     </div>
@@ -402,47 +410,47 @@
 
   <!-- Kin 3 Section -->
   <div class="col-4">
-    <h4>Next of Kin 3</h4>
-    <div class="form-group">
-      <label for="kin3-name">Name:</label>
+    <h6>Next of Kin 3</h6>
+    <div class="form-group mb-2">
+      
       <input 
         id="kin3-name" 
         v-model="form.kin3Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 3 Name"
+        placeholder="Enter Kin Name"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin3-contact">Contact Number:</label>
+    <div class="form-group mb-2">
+     
       <input 
         id="kin3-contact" 
         v-model="form.kin3Contact" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 3 Contact Number"
+        placeholder="Contact Number"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin3-relation">Relation:</label>
+    <div class="form-group mb-2">
+      
       <input 
         id="kin3-relation" 
         v-model="form.kin3Relation" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin 3 Relation"
+        placeholder="Relation"
         required 
       />
     </div>
-    <div class="form-group">
-      <label for="kin3-address">Sms:</label>
+    <div class="form-group mb-2">
+      
       <textarea 
         id="kin3-address" 
         v-model="form.kin3Address" 
         class="form-control" 
-        placeholder="Enter Kin 3 Address"
+        placeholder="Remarks"
         required
       ></textarea>
     </div>
@@ -506,35 +514,34 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-
 export default {
-  name: 'PatientForm',
-  setup() {
-    const isModalOpen = ref(false);
-    const form = ref({
-      name: '',
-      age: '',
-      contact: '',
-      address: '',
-      kinName: '',
-      kinContact: '',
-      kinRelation: '',
-      kinAddress: '',
-    });
-
-    const openModal = () => {
-      isModalOpen.value = true;
+  name: 'CreatePatientPopup',
+  data() {
+    return {
+      isModalOpen: false,
+      form: {
+        name: '',
+        age: '',
+        contact: '',
+        address: '',
+        kinName: '',
+        kinContact: '',
+        kinRelation: '',
+        kinAddress: '',
+      },
     };
-
-    const closeModal = () => {
-      isModalOpen.value = false;
-    };
-
-    const submitForm = () => {
-      console.log('Form submitted:', form.value);
-      closeModal();
-      form.value = {
+  },
+  methods: {
+    openModal() {
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+    },
+    submitForm() {
+     
+      this.closeModal();
+      this.form = {
         name: '',
         age: '',
         contact: '',
@@ -544,12 +551,11 @@ export default {
         kinRelation: '',
         kinAddress: '',
       };
-    };
-
-    return { isModalOpen, form, openModal, closeModal, submitForm };
+    },
   },
 };
 </script>
+
 
 <style scoped>
 input, textarea {
@@ -594,14 +600,16 @@ textarea {
    margin-bottom: 0px;
 }
 .col-8{
-   margin-top: 30px;
+   margin-top: 22px;
 }
 .col-6{
    padding-top: 0px !important;
+ 
 }
 
 label{
    font-size: 12px;
+   color: #7B7B7B;
 }
 #sensitive-patient{
    width: 2% !important;
@@ -642,6 +650,19 @@ label{
 
 .reason-input:focus {
   outline: none;
+}
+::placeholder{
+   font-size: 12px;
+}
+h3, h4 {
+   font-size: 14px;
+}
+h6{
+   color: #7B7B7B !important;
+}
+.red{
+   color: #EC6161!important;
+   background-color: #ffffff !important;
 }
 
 

@@ -8,7 +8,6 @@
     :style="{
       width: isMini ? '80px' : '225px',
       transition: 'width 0.3s ease-in-out, padding 0.3s ease-in-out'
-         
     }"
   >
     <v-col
@@ -24,37 +23,40 @@
         <img v-if="isMini" src="js/assets/icons/collapsible icon.png" />
       </div>
 
-      <!-- Menu Buttons -->
-      <div class="d-flex flex-column align-start w-100">
-        <v-btn
-          outlined
-          color="#2096F3"
-          class="mb-2 rounded d-flex align-center justify-start"
-          style="width: 100%; "
-          @click="toggleSidebar"
-        >
-          <img
-            src="js/assets/icons/Picture1.svg"
-            alt="Menu Icon"
-            style="width: 20px; height: 20px; margin-right: 10px;"
-          />
-          <span v-if="!isMini" class="text-truncate">Collapse Menu</span>
-        </v-btn>
+    <!-- Menu Buttons -->
+<div class="d-flex flex-column align-start w-100">
+  <v-btn
+    :outlined="!isMini"
+    color="#2096F3"
+    class="mb-2 rounded d-flex align-center justify-start"
+    :style="{
+      backgroundColor: isMini ? 'white' : '',
+      boxShadow: isMini ? 'none' : '',
+      border: isMini ? 'none' : '2px solid #2096F3'
+    }"
+    @click="toggleSidebar"
+  >
+    <img
+      src="js/assets/icons/Picture1.svg"
+      alt="Menu Icon"
+      style="width: 20px; height: 20px; margin-right: 10px;"
+    />
+    <span v-if="!isMini" class="text-truncate">Collapse Menu</span>
+  </v-btn>
 
-      <v-btn
+
+
+       <v-btn
   class="mb-2 rounded-xl shadow-none d-flex align-center justify-start"
   style="width: 100%;"
+  :style="isMini ? { backgroundColor: 'white', boxShadow: 'none' } : {}"
 >
   <img
     src="js/assets/icons/Picture9.svg"
     alt="Menu Icon"
     style="width: 20px; height: 20px; margin-right: 10px;"
   />
-  <span
-    v-if="!isMini"
-    class="text-truncate"
-    style="color: #2096F3;"
-  >
+  <span v-if="!isMini" class="text-truncate" style="color: #2096F3;">
     Waiting List
   </span>
 </v-btn>
@@ -67,15 +69,13 @@
       <v-footer class="pa-0" padless>
         <v-row class="d-flex flex-column align-start w-100" no-gutters>
           <v-col>
-           <v-btn
-  block
-  icon
-  class="d-flex align-center justify-start rounded-xl pa-3"
-  style="width: 100%; border: 2px solid #ec6161;"
-  @click="goToMessages"
->
-
-
+            <v-btn
+              block
+              icon
+              class="d-flex align-center justify-start rounded-xl pa-3"
+              :style="isMini ? { border: 'none' } : { border: '2px solid #ec6161' }"
+              @click="goToMessages"
+            >
               <img
                 src="js/assets/icons/Picture8.png"
                 alt="Menu Icon"
@@ -89,7 +89,7 @@
               block
               icon
               class="d-flex align-center justify-start pa-3"
-              style="width: 100%;"
+              :style="isMini ? { border: 'none' } : {}"
               @click="goToUsers"
             >
               <img
@@ -98,7 +98,6 @@
                 style="width: 20px; height: 20px; margin-right: 10px;"
               />
               <span v-if="!isMini" class="text-truncate" style="color: #2096F3;">Users</span>
-              
             </v-btn>
           </v-col>
           <v-col>
@@ -106,7 +105,7 @@
               block
               icon
               class="d-flex align-center justify-start pa-3"
-              style="width: 100%; "
+              :style="isMini ? { border: 'none' } : {}"
               @click="signOut"
             >
               <img
@@ -121,7 +120,6 @@
       </v-footer>
     </v-col>
   </v-navigation-drawer>
-  
 </template>
 
 <script>
@@ -142,11 +140,9 @@ export default {
     toggleSidebar() {
       this.isMini = !this.isMini; 
     },
-    
   },
 };
 </script>
 
 <style scoped>
-
 </style>

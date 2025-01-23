@@ -1,9 +1,7 @@
 ﻿<template>
   <div class="pa-4 pt-0 mt-2 full-container">
-   
-   
-    <v-row class="pa-4 pt-0">
-      <v-col cols="12">
+    <v-row class="pa-4">
+      <v-col cols="12 ps-0">
         <v-card class="pa-2 pt-0 pb-0" outlined>
           <v-text-field
             v-model="searchQuery"
@@ -14,6 +12,7 @@
             :prepend-inner-icon="'mdi-language-english'"
             placeholder="Search Patient"
             hide-details
+            @input="onSearch"
           >
             <template #append>
               <v-btn icon @click="onSearch">
@@ -32,33 +31,61 @@
         </v-card>
       </v-col>
     </v-row>
+
+   
+    
+        <get-patients :patients="patients" />
+     
+
+   
+    
   </div>
 </template>
 
 <script>
-const patientService = require('services/Patient.js')
+import GetPatients from 'components/App/GetPatients.vue';
+import patientService from 'services/Patient.js';
 
 export default {
+  components: {
+    'get-patients': GetPatients,
+  },
   data() {
     return {
-      items: [],
-      total: 0,
-      options: {},
+      searchQuery: '',  // Empty string to get all patients
+      patients: [],
     };
   },
-  computed: {},
-  mounted() {},
-  methods: {
-    async getPatients() {
-      const response = await patientService.gets(this.options)
-      const data = response.data
-      this.items = data.items
-      this.total = data.total
+   watch: {
+    // Watch for changes in the searchQuery and clear patients immediately when searchQuery is empty
+    searchQuery(newQuery) {
+      if (newQuery === '') {
+        this.patients = [];  // Clear the patients list when search query is empty
+      }
     },
-  }
+  },
+  methods: {
+    async onSearch() {
+      // If the search query is an empty string, don't call the API
+      if (this.searchQuery === '') {
+        this.patients = [];  // Clear the patients list if the query is empty
+        return;  // Return early to prevent the API call
+      }
+      
+      // Proceed with the API call if there's a search query
+      try {
+        const response = await patientService.gets({ englishName: this.searchQuery });
+        this.patients = response.items;
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      }
+    },
+  },
+ 
 };
 </script>
 
-<style scoped>
 
-</style> 
+
+<style scoped>
+</style>
