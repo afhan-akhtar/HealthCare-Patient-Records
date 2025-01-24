@@ -65,4 +65,99 @@ module.exports = {
       throw error;
     }
   },
+
+  /**
+   * Create a new patient record
+   * @param {Object} patientData - The data for the new patient
+   * @return {Object} created patient record
+   */
+  async createPatient(patientData) {
+    try {
+      const response = await fetch(rootPath, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'api-version': '1.0',
+        },
+        body: JSON.stringify(patientData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error creating patient record:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Edit an existing patient record
+   * @param {string} id - The patient ID
+   * @param {Object} patientData - The updated data for the patient
+   * @return {Object} updated patient record
+   */
+  async editPatient(id, patientData) {
+    try {
+      if (!id) {
+        throw new Error('Patient ID is required');
+      }
+
+      const url = `${rootPath}/${id}`;
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'api-version': '1.0',
+        },
+        body: JSON.stringify(patientData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error editing patient record:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Get a patient by ID
+   * @param {string} id - The patient ID
+   * @return {Object} patient record
+   */
+  async getPatient(id) {
+    try {
+      if (!id) {
+        throw new Error('Patient ID is required');
+      }
+
+      const url = `${rootPath}/${id}`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'text/plain',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching patient record:', error);
+      throw error;
+    }
+  },
 };

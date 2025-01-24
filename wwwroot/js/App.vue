@@ -4,19 +4,9 @@
       <t-app-header ref="appHeader" @called="called"></t-app-header>
       <v-main class="container-fluid-max" style="background: var(--v-bkgroundLightGrey-base);">
         <v-container fluid class="ma-0 pa-0 fullcont">
-          <create-patient />
+          
           <router-view ref="routerView" @saveBeforeLeave="saveBeforeLeave"></router-view>
-           <!-- <v-row class="pe-5"> -->
-        <!-- Get Patients takes 8 columns -->
-        <!-- <v-col cols="12" md="9">
-          <get-patients />
-        </v-col> -->
-        
-        <!-- Patient Details takes 4 columns -->
-        <!-- <v-col cols="12" md="3" class="pt-0">
-          <patient-details />
-        </v-col> -->
-      <!-- </v-row> -->
+          
         </v-container>
       </v-main>
     </template>
@@ -31,9 +21,7 @@
 </template>
 
 <script>
-import GetPatients from 'components/App/GetPatients.vue';
-import PatientDetails from 'components/App/PatientDetails.vue';
-import CreatePatient from 'components/App/CreatePatientPopup.vue';
+
 
 const settings = window['~/app'].settings
 const appAxios = require('app/VueAxios.js')
@@ -46,9 +34,7 @@ Vue.use(CKEditor, infiniteScroll)
 export default {
   components: {
     't-app-header': () => import('./components/App/Header.vue'),
-    "get-patients": GetPatients,
-    "patient-details": PatientDetails,
-    "create-patient": CreatePatient
+   
   },
   data() {
     return {

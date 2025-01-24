@@ -1,5 +1,12 @@
 ﻿<template>
   <div class="pa-4 pt-0 mt-2 full-container">
+    <!-- Header -->
+    <div class="header pt-2 pb-0 ps-1">
+      <span>Patient</span>
+      <button class="create-btn rounded-xl" @click="openCreatePatientForm">+ Create Patient</button>
+    </div>
+    
+    <!-- Search Field -->
     <v-row class="pa-4">
       <v-col cols="12 ps-0">
         <v-card class="pa-2 pt-0 pb-0" outlined>
@@ -32,47 +39,52 @@
       </v-col>
     </v-row>
 
-   
+    <!-- Patients List and Patient Form -->
+    <search-patients :patients="patients" @view-patient-details="openEditPatientForm" />
     
-        <get-patients :patients="patients" />
-     
-
-   
-    
+    <!-- Patient Form for Create/Edit -->
+    <patient-form
+      v-if="isFormVisible"
+      :mode="formMode"
+      :patient="currentPatient"
+      @close="closeForm"
+    />
   </div>
 </template>
 
 <script>
-import GetPatients from 'components/App/GetPatients.vue';
+import SearchPatients from 'components/App/SearchPatients.vue';
 import patientService from 'services/Patient.js';
+import PatientForm from 'components/App/PatientForm.vue';
 
 export default {
   components: {
-    'get-patients': GetPatients,
+    'search-patients': SearchPatients,
+    'patient-form': PatientForm,
   },
   data() {
     return {
       searchQuery: '',  // Empty string to get all patients
       patients: [],
+      isFormVisible: false, // Controls the visibility of the patient form
+      formMode: 'create', // Tracks whether the form is in "create" or "edit" mode
+      currentPatient: {}, // Holds the current patient data for editing
     };
   },
-   watch: {
-    // Watch for changes in the searchQuery and clear patients immediately when searchQuery is empty
+  watch: {
     searchQuery(newQuery) {
       if (newQuery === '') {
-        this.patients = [];  // Clear the patients list when search query is empty
+        this.patients = [];
       }
     },
   },
   methods: {
     async onSearch() {
-      // If the search query is an empty string, don't call the API
       if (this.searchQuery === '') {
-        this.patients = [];  // Clear the patients list if the query is empty
-        return;  // Return early to prevent the API call
+        this.patients = [];
+        return;
       }
       
-      // Proceed with the API call if there's a search query
       try {
         const response = await patientService.gets({ englishName: this.searchQuery });
         this.patients = response.items;
@@ -80,12 +92,34 @@ export default {
         console.error('Error fetching patients:', error);
       }
     },
+
+    // Open the patient form in "create" mode
+    openCreatePatientForm() {
+      this.isFormVisible = true;
+      this.formMode = 'create';
+      this.currentPatient = {}; // Clear the current patient data
+    },
+
+  openEditPatientForm(patientId) {
+      this.selectedPatientId = patientId; // Store the selected patient's ID
+      this.formMode = 'edit';
+      this.fetchPatientDetails(patientId); // Fetch patient details based on id
+    },
+    async fetchPatientDetails(id) {
+      const patientDetails = await patientService.getPatient(id);
+      this.currentPatient = patientDetails;
+      this.isFormVisible = true; // Show the form to edit patient
+    },
+
+
+    // Close the form
+    closeForm() {
+      this.isFormVisible = false;
+      this.currentPatient = {}; // Reset the patient data
+    },
   },
- 
 };
 </script>
-
-
 
 <style scoped>
 </style>

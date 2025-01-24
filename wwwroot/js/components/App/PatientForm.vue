@@ -1,17 +1,12 @@
 <template>
   <div>
-    <!-- Header -->
-    <div class="header pt-2 pb-0 mx-4 ps-1">
-      <span>Patient</span>
-      <button class="create-btn rounded-xl" @click="openModal">+ Create Patient</button>
-    </div>
-
+   
     <!-- Modal -->
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header pb-2">
-          <h3>Create New Patient</h3>
-          <button class="close-btn" @click="closeModal">&times;</button>
+        <h3>{{ formMode === 'create' ? 'Create New Patient' : 'Edit Patient' }}</h3>
+     <button class="close-btn" @click="closeForm">&times;</button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="submitForm">
@@ -501,10 +496,19 @@
 
              
             </div>
-            <div class="row" style="display: flex; justify-content: end;">
-                 <button type="submit" class="cancel-btn rounded-xl">Cancel</button>
-            <button type="submit" class="save-btn ms-2 rounded-xl">Save</button>
-            </div>
+            <!-- Button Section -->
+<div class="form-group d-flex justify-content-end">
+  <!-- Create Form: Cancel and Save buttons on the right -->
+   <button v-if="formMode === 'create'" type="submit" class="cancel-btn rounded-xl">Cancel</button>
+    <button v-if="formMode === 'create'" type="submit" class="save-btn ms-2 rounded-xl">Save</button>
+
+  <!-- Edit Form: Edit button on the left, Cancel button on the right -->
+  <button v-if="formMode === 'edit'" type="button" class="btn btn-outline-primary me-auto" @click="submitForm">
+    Edit
+  </button>
+  <button v-if="formMode === 'edit'" type="submit" class="cancel-btn rounded-xl">Cancel</button>
+</div>
+
            
           </form>
         </div>
@@ -514,44 +518,175 @@
 </template>
 
 <script>
+import patientService from 'services/Patient.js';
 export default {
-  name: 'CreatePatientPopup',
+  props: {
+    mode: String, // 'create' or 'edit'
+    patient: Object,
+  },
   data() {
     return {
-      isModalOpen: false,
-      form: {
-        name: '',
-        age: '',
-        contact: '',
-        address: '',
-        kinName: '',
-        kinContact: '',
-        kinRelation: '',
-        kinAddress: '',
-      },
+      formMode: this.mode || 'create',
+      form: this.patient || {},
+      isModalOpen: true,
+      formData: {
+        documentTypeId: 0,
+        documentNumber: "string",
+        chineseName: "string",
+        surname: "string",
+        givenName: "string",
+        sex: "string",
+        dateOfBirth: "2025-01-24T06:30:25.004Z",
+        occupation: "string",
+        nationalityId: 0,
+        prNumber: "string",
+        homeTelNo: "string",
+        mobileCountryCodeId: 0,
+        mobileNumber: "string",
+        isSeparateMailingAddress: true,
+        residentStructureAddressZone: "string",
+        residentStructureAddressDistrict: "string",
+        residentStructureAddressSubdistrict: "string",
+        residentStructureAddressStreet: "string",
+        residentStructureAddressVillage: "string",
+        residentStructureAddressEstate: "string",
+        residentStructureAddressBlock: "string",
+        residentStructureAddressFloor: "string",
+        residentStructureAddressFlat: "string",
+        mailingStructureAddressZone: "string",
+        mailingStructureAddressDistrict: "string",
+        mailingStructureAddressSubdistrict: "string",
+        mailingStructureAddressStreet: "string",
+        mailingStructureAddressVillage: "string",
+        mailingStructureAddressEstate: "string",
+        mailingStructureAddressBlock: "string",
+        mailingStructureAddressFloor: "string",
+        mailingStructureAddressFlat: "string",
+        remark: "string",
+        email: "string",
+        isMarketingPurpose: true,
+        isCancelSubscription: true,
+        smsLanguage: "string",
+        isRefuseSms: true,
+        nextOfKin1Name: "string",
+        nextOfKin1RelationshipId: 0,
+        nextOfKin1ContactNumber: "string",
+        nextOfKin1SmsNumber: "string",
+        nextOfKin1Remark: "string",
+        nextOfKin2Name: "string",
+        nextOfKin2RelationshipId: 0,
+        nextOfKin2ContactNumber: "string",
+        nextOfKin2SmsNumber: "string",
+        nextOfKin2Remark: "string",
+        nextOfKin3Name: "string",
+        nextOfKin3RelationshipId: 0,
+        nextOfKin3ContactNumber: "string",
+        nextOfKin3SmsNumber: "string",
+        nextOfKin3Remark: "string",
+        isSensitive: true,
+        isOutstandingBill: true,
+        outstandingBillReason: "string",
+        isPersonaNonGrata: true,
+        personaNonGrataReason: "string"
+      }
     };
+    
   },
   methods: {
-    openModal() {
-      this.isModalOpen = true;
-    },
-    closeModal() {
+    closeForm() {
       this.isModalOpen = false;
+      this.$emit('close');
     },
-    submitForm() {
-     
-      this.closeModal();
-      this.form = {
-        name: '',
-        age: '',
-        contact: '',
-        address: '',
-        kinName: '',
-        kinContact: '',
-        kinRelation: '',
-        kinAddress: '',
+    
+  async submitForm() {
+  try {
+    // If in 'edit' mode, fetch the patient details first using the patient ID
+    if (this.formMode === 'edit') {
+      const patientId = this.formData.id; // Make sure to set the correct patient ID in formData
+      const patientData = await patientService.getPatient(patientId); // Fetch patient data
+
+      // Now, prepare the data to send to the API for editing
+      const updatedPatientData = {
+        ...patientData,  // Existing patient data
+        ...this.formData, // New form data
       };
-    },
+
+      // Call the editPatient method to update the patient
+      const response = await patientService.editPatient(patientId, updatedPatientData);
+      console.log('Patient updated successfully:', response);
+    } else if (this.formMode === 'create') {
+      // Prepare the data to send to the API for creating a new patient
+      const patientData = {
+        documentTypeId: this.formData.documentTypeId,
+        documentNumber: this.formData.documentNumber,
+        chineseName: this.formData.chineseName,
+        surname: this.formData.surname,
+        givenName: this.formData.givenName,
+        sex: this.formData.sex,
+        dateOfBirth: this.formData.dateOfBirth,
+        occupation: this.formData.occupation,
+        nationalityId: this.formData.nationalityId,
+        prNumber: this.formData.prNumber,
+        homeTelNo: this.formData.homeTelNo,
+        mobileCountryCodeId: this.formData.mobileCountryCodeId,
+        mobileNumber: this.formData.mobileNumber,
+        isSeparateMailingAddress: this.formData.isSeparateMailingAddress,
+        residentStructureAddressZone: this.formData.residentStructureAddressZone,
+        residentStructureAddressDistrict: this.formData.residentStructureAddressDistrict,
+        residentStructureAddressSubdistrict: this.formData.residentStructureAddressSubdistrict,
+        residentStructureAddressStreet: this.formData.residentStructureAddressStreet,
+        residentStructureAddressVillage: this.formData.residentStructureAddressVillage,
+        residentStructureAddressEstate: this.formData.residentStructureAddressEstate,
+        residentStructureAddressBlock: this.formData.residentStructureAddressBlock,
+        residentStructureAddressFloor: this.formData.residentStructureAddressFloor,
+        residentStructureAddressFlat: this.formData.residentStructureAddressFlat,
+        mailingStructureAddressZone: this.formData.mailingStructureAddressZone,
+        mailingStructureAddressDistrict: this.formData.mailingStructureAddressDistrict,
+        mailingStructureAddressSubdistrict: this.formData.mailingStructureAddressSubdistrict,
+        mailingStructureAddressStreet: this.formData.mailingStructureAddressStreet,
+        mailingStructureAddressVillage: this.formData.mailingStructureAddressVillage,
+        mailingStructureAddressEstate: this.formData.mailingStructureAddressEstate,
+        mailingStructureAddressBlock: this.formData.mailingStructureAddressBlock,
+        mailingStructureAddressFloor: this.formData.mailingStructureAddressFloor,
+        mailingStructureAddressFlat: this.formData.mailingStructureAddressFlat,
+        remark: this.formData.remark,
+        email: this.formData.email,
+        isMarketingPurpose: this.formData.isMarketingPurpose,
+        isCancelSubscription: this.formData.isCancelSubscription,
+        smsLanguage: this.formData.smsLanguage,
+        isRefuseSms: this.formData.isRefuseSms,
+        nextOfKin1Name: this.formData.nextOfKin1Name,
+        nextOfKin1RelationshipId: this.formData.nextOfKin1RelationshipId,
+        nextOfKin1ContactNumber: this.formData.nextOfKin1ContactNumber,
+        nextOfKin1SmsNumber: this.formData.nextOfKin1SmsNumber,
+        nextOfKin1Remark: this.formData.nextOfKin1Remark,
+        nextOfKin2Name: this.formData.nextOfKin2Name,
+        nextOfKin2RelationshipId: this.formData.nextOfKin2RelationshipId,
+        nextOfKin2ContactNumber: this.formData.nextOfKin2ContactNumber,
+        nextOfKin2SmsNumber: this.formData.nextOfKin2SmsNumber,
+        nextOfKin2Remark: this.formData.nextOfKin2Remark,
+        nextOfKin3Name: this.formData.nextOfKin3Name,
+        nextOfKin3RelationshipId: this.formData.nextOfKin3RelationshipId,
+        nextOfKin3ContactNumber: this.formData.nextOfKin3ContactNumber,
+        nextOfKin3SmsNumber: this.formData.nextOfKin3SmsNumber,
+        nextOfKin3Remark: this.formData.nextOfKin3Remark,
+        isSensitive: this.formData.isSensitive,
+        isOutstandingBill: this.formData.isOutstandingBill,
+        outstandingBillReason: this.formData.outstandingBillReason,
+        isPersonaNonGrata: this.formData.isPersonaNonGrata,
+        personaNonGrataReason: this.formData.personaNonGrataReason
+      };
+
+      // Call the createPatient method to create a new patient
+      const response = await patientService.createPatient(patientData);
+      console.log('Patient created successfully:', response);
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+}
+
+
   },
 };
 </script>
