@@ -20,14 +20,14 @@
   <label for="document-type">Document No.<span class="red">*</span></label>
   <div class="position-relative">
     <input
-      id="document-type"
-      v-model="form.documentType"
-      class="form-control pr-5"
-      placeholder="HKID"
-      required
-      readonly
-      @click="toggleDropdown"
-    />
+  id="document-type"
+  value="HKID"
+  class="form-control pr-5"
+  placeholder="HKID"
+  required
+  
+/>
+
     <!-- Dropdown Icon inside Input -->
     <span class="position-absolute top-50 end-0 translate-middle-y cursor-pointer">
       &#9662; <!-- Downward arrow (you can use an icon here) -->
@@ -39,8 +39,8 @@
   <div class="col-8 d-flex position-relative">
   
     <input 
-      id="name" 
-      v-model="form.name" 
+      id="documentNumber" 
+      v-model="form.documentNumber" 
       type="text" 
       class="form-control pr-5" 
       placeholder="Document No"
@@ -49,7 +49,7 @@
     <!-- Cross Icon inside Input -->
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-      @click="form.name = ''"
+    
     >
       &times;
     </span>
@@ -70,7 +70,7 @@
      <!-- Cross Icon inside Input -->
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-      @click="form.name = ''"
+  
     >
       &times;
     </span>
@@ -78,7 +78,7 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">Given Name</label>
+    <label for="givenName">Given Name<span class="red">*</span></label>
     <input 
       id="givenName" 
       v-model="form.givenName" 
@@ -92,19 +92,19 @@
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Chinese</label>
+    <label for="chinesename">中文名 </label>
     <input 
-      id="surname" 
-      v-model="form.surname" 
+      id="chinesename" 
+      v-model="form.chineseName" 
       type="text" 
       class="form-control" 
-      placeholder="Chinese"
+      placeholder="中文名 "
       required 
     />
   </div>
 
   <div class="col-6">
-    <label for="givenName">Sex<span class="red">*</span></label>
+    <label for="sex">Sex<span class="red">*</span></label>
     <div class="tabs" style="display: flex; gap: 10px;">
       <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'male'}" @click="form.sex = 'male'">Male</label>
       <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'female'}" @click="form.sex = 'female'">Female</label>
@@ -114,10 +114,10 @@
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Date Of Birth<span class="red">*</span></label>
+    <label for="dateOfBirth">Date Of Birth<span class="red">*</span></label>
     <input 
-      id="surname" 
-      v-model="form.surname" 
+      id="dateOfBirth" 
+      v-model="form.dateOfBirth" 
       type="date" 
       class="form-control pe-2" 
       placeholder="DD/M/YY"
@@ -126,10 +126,10 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">Occupation</label>
+    <label for="occupation">Occupation</label>
     <input 
-      id="givenName" 
-      v-model="form.givenName" 
+      id="occupation" 
+      v-model="form.occupation" 
       type="text" 
       class="form-control" 
       placeholder="Free Text"
@@ -142,10 +142,10 @@
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Nationality</label>
+    <label for="nationality">Nationality</label>
     <input 
-      id="surname" 
-      v-model="form.surname" 
+      id="nationality" 
+      v-model="form.nationalityId" 
       type="text" 
       class="form-control" 
       placeholder="Nationality"
@@ -154,10 +154,10 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">PR No.</label>
+    <label for="prNO">PR No.</label>
     <input 
-      id="givenName" 
-      v-model="form.givenName" 
+      id="prNO" 
+      v-model="form.prNumber" 
       type="text" 
       class="form-control" 
       placeholder="PR No."
@@ -169,10 +169,10 @@
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Mobile<span class="red">*</span></label>
+    <label for="MOBILE">Mobile<span class="red">*</span></label>
     <input 
-      id="surname" 
-      v-model="form.surname" 
+      id="MOBILE" 
+      v-model="form.mobileNumber" 
       type="text" 
       class="form-control" 
       placeholder=""
@@ -181,10 +181,10 @@
   </div>
 
   <div class="col-6">
-    <label for="givenName">Tel No. (Home)</label>
+    <label for="tel">Tel No. (Home)</label>
     <input 
-      id="givenName" 
-      v-model="form.givenName" 
+      id="tel" 
+      v-model="form.homeTelNo" 
       type="text" 
       class="form-control" 
       placeholder="Free Text"
@@ -531,63 +531,63 @@ export default {
       isModalOpen: true,
       formData: {
         documentTypeId: 0,
-        documentNumber: "string",
-        chineseName: "string",
-        surname: "string",
-        givenName: "string",
-        sex: "string",
-        dateOfBirth: "2025-01-24T06:30:25.004Z",
-        occupation: "string",
+        documentNumber: "",
+        chineseName: "",
+        surname: "",
+        givenName: "",
+        sex: "",
+        dateOfBirth: "",
+        occupation: "",
         nationalityId: 0,
-        prNumber: "string",
-        homeTelNo: "string",
+        prNumber: "",
+        homeTelNo: "",
         mobileCountryCodeId: 0,
-        mobileNumber: "string",
+        mobileNumber: "",
         isSeparateMailingAddress: true,
-        residentStructureAddressZone: "string",
-        residentStructureAddressDistrict: "string",
-        residentStructureAddressSubdistrict: "string",
-        residentStructureAddressStreet: "string",
-        residentStructureAddressVillage: "string",
-        residentStructureAddressEstate: "string",
-        residentStructureAddressBlock: "string",
-        residentStructureAddressFloor: "string",
-        residentStructureAddressFlat: "string",
-        mailingStructureAddressZone: "string",
-        mailingStructureAddressDistrict: "string",
-        mailingStructureAddressSubdistrict: "string",
-        mailingStructureAddressStreet: "string",
-        mailingStructureAddressVillage: "string",
-        mailingStructureAddressEstate: "string",
-        mailingStructureAddressBlock: "string",
-        mailingStructureAddressFloor: "string",
-        mailingStructureAddressFlat: "string",
-        remark: "string",
-        email: "string",
+        residentStructureAddressZone: "",
+        residentStructureAddressDistrict: "",
+        residentStructureAddressSubdistrict: "",
+        residentStructureAddressStreet: "",
+        residentStructureAddressVillage: "",
+        residentStructureAddressEstate: "",
+        residentStructureAddressBlock: "",
+        residentStructureAddressFloor: "",
+        residentStructureAddressFlat: "",
+        mailingStructureAddressZone: "",
+        mailingStructureAddressDistrict: "",
+        mailingStructureAddressSubdistrict: "",
+        mailingStructureAddressStreet: "",
+        mailingStructureAddressVillage: "",
+        mailingStructureAddressEstate: "",
+        mailingStructureAddressBlock: "",
+        mailingStructureAddressFloor: "",
+        mailingStructureAddressFlat: "",
+        remark: "",
+        email: "",
         isMarketingPurpose: true,
         isCancelSubscription: true,
-        smsLanguage: "string",
+        smsLanguage: "",
         isRefuseSms: true,
-        nextOfKin1Name: "string",
+        nextOfKin1Name: "",
         nextOfKin1RelationshipId: 0,
-        nextOfKin1ContactNumber: "string",
-        nextOfKin1SmsNumber: "string",
-        nextOfKin1Remark: "string",
-        nextOfKin2Name: "string",
+        nextOfKin1ContactNumber: "",
+        nextOfKin1SmsNumber: "",
+        nextOfKin1Remark: "",
+        nextOfKin2Name: "",
         nextOfKin2RelationshipId: 0,
-        nextOfKin2ContactNumber: "string",
-        nextOfKin2SmsNumber: "string",
-        nextOfKin2Remark: "string",
-        nextOfKin3Name: "string",
+        nextOfKin2ContactNumber: "",
+        nextOfKin2SmsNumber: "",
+        nextOfKin2Remark: "",
+        nextOfKin3Name: "",
         nextOfKin3RelationshipId: 0,
-        nextOfKin3ContactNumber: "string",
-        nextOfKin3SmsNumber: "string",
-        nextOfKin3Remark: "string",
+        nextOfKin3ContactNumber: "",
+        nextOfKin3SmsNumber: "",
+        nextOfKin3Remark: "",
         isSensitive: true,
         isOutstandingBill: true,
-        outstandingBillReason: "string",
+        outstandingBillReason: "",
         isPersonaNonGrata: true,
-        personaNonGrataReason: "string"
+        personaNonGrataReason: ""
       }
     };
     
@@ -799,6 +799,29 @@ h6{
    color: #EC6161!important;
    background-color: #ffffff !important;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-height: 90%; /* Adjust this as needed */
+    width: 80%; /* Adjust this as needed */
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto !important; /* Enables vertical scrolling when content overflows */
+    overflow-x: hidden !important; /* Prevents horizontal scrolling */
+}
+
 
 
 </style>

@@ -1,7 +1,7 @@
 ﻿<template>
   <div class="pa-4 pt-0 mt-2 full-container">
     <!-- Header -->
-    <div class="header pt-2 pb-0 ps-1">
+    <div class="header pt-2 pb-3 ps-1">
       <span>Patient</span>
       <button class="create-btn rounded-xl" @click="openCreatePatientForm">+ Create Patient</button>
     </div>
