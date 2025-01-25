@@ -24,6 +24,7 @@
   value="HKID"
   class="form-control pr-5"
   placeholder="HKID"
+  tabIndex="44" 
   
   
 />
@@ -44,6 +45,7 @@
       type="text" 
       class="form-control pr-5" 
       placeholder="Document No"
+      tabIndex="43" 
       
     />
     <!-- Cross Icon inside Input -->
@@ -65,6 +67,7 @@
       type="text" 
       class="form-control" 
       placeholder="Surname"
+      tabIndex="42" 
        
     />
      <!-- Cross Icon inside Input -->
@@ -85,6 +88,7 @@
       type="text" 
       class="form-control" 
       placeholder="Given Name"
+      tabIndex="41" 
        
     />
   </div>
@@ -99,6 +103,7 @@
       type="text" 
       class="form-control" 
       placeholder="中文名 "
+      tabIndex="40" 
        
     />
   </div>
@@ -106,8 +111,8 @@
   <div class="col-6">
     <label for="sex">Sex<span class="red">*</span></label>
     <div class="tabs" style="display: flex; gap: 10px;">
-      <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'male'}" @click="form.sex = 'male'">Male</label>
-      <label class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'female'}" @click="form.sex = 'female'">Female</label>
+      <label tabIndex="39"  class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'male'}" @click="form.sex = 'male'">Male</label>
+      <label tabIndex="38"  class="tab-option" style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" :class="{'active': form.sex === 'female'}" @click="form.sex = 'female'">Female</label>
     </div>
   </div>
 </div>
@@ -121,6 +126,8 @@
       type="date" 
       class="form-control pe-2" 
       placeholder="DD/M/YY"
+      tabIndex="37" 
+      
        
     />
   </div>
@@ -133,6 +140,7 @@
       type="text" 
       class="form-control" 
       placeholder="Free Text"
+      tabIndex="36" 
        
     />
   </div>
@@ -149,6 +157,7 @@
       type="text" 
       class="form-control" 
       placeholder="Nationality"
+      tabIndex="35" 
        
     />
   </div>
@@ -161,6 +170,7 @@
       type="text" 
       class="form-control" 
       placeholder="PR No."
+      tabIndex="34" 
        
     />
   </div>
@@ -168,16 +178,45 @@
 
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6 ps-0">
-    <label for="MOBILE">Mobile<span class="red">*</span></label>
+    <div class="col-4">
+  <label for="document-type">Mobile<span class="red">*</span></label>
+  <div class="position-relative">
+    <input
+  id="mobile-no"
+  value="+852"
+  class="form-control pr-5"
+  placeholder="+852"
+  tabIndex="33" 
+  
+  
+/>
+
+    <!-- Dropdown Icon inside Input -->
+    <span class="position-absolute top-50 end-0 translate-middle-y cursor-pointer">
+      &#9662; <!-- Downward arrow (you can use an icon here) -->
+    </span>
+  </div>
+</div>
+
+  <!-- Input Text in col-8 with flex -->
+  <div class="col-8 d-flex position-relative">
+  
     <input 
-      id="MOBILE" 
+      id="Mobile" 
       v-model="form.mobileNumber" 
       type="text" 
-      class="form-control" 
-      placeholder=""
-       
+      class="form-control pr-5" 
+      placeholder="Free Text"
+      tabIndex="32" 
+      
     />
+    <!-- Cross Icon inside Input -->
+    <span 
+      class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+    
+    >
+      &times;
+    </span>
   </div>
 
   <div class="col-6">
@@ -188,6 +227,7 @@
       type="text" 
       class="form-control" 
       placeholder="Free Text"
+      tabIndex="31" 
        
     />
   </div>
@@ -195,7 +235,7 @@
 
 <div style="display: flex; justify-content: space-between;">
   <h3>Address</h3>
-  <button  type="button"  class="save-btn ms-2 rounded-xl" @click="openAddressModal">Edit Address</button>
+  <button tabIndex="30"   type="button"  class="save-btn ms-2 rounded-xl" @click="openAddressModal">Edit Address</button>
 </div>
 
   <edit-address 
@@ -241,6 +281,7 @@
       type="text" 
       class="form-control" 
       placeholder=""
+      tabIndex="29" 
        
     />
   </div>
@@ -253,6 +294,7 @@
       type="text" 
       class="form-control" 
       placeholder="Free Text"
+      tabIndex="28" 
        
     />
   </div>
@@ -278,6 +320,7 @@
         v-model="form.marketingPurpose" 
         type="checkbox" 
         class="form-check-input me-1" 
+        tabIndex="27" 
       />
       <label for="marketingPurpose" class="form-check-label">Marketing Purpose</label>
     </div>
@@ -288,6 +331,7 @@
         v-model="form.cancelSubscription" 
         type="checkbox" 
         class="form-check-input me-1" 
+        tabIndex="26" 
       />
       <label for="cancelSubscription" class="form-check-label">Cancel Subscription</label>
     </div>
@@ -303,6 +347,7 @@
   <div class="tabs" style="display: flex; gap: 10px;">
     <label 
       class="tab-option" 
+      tabIndex="25" 
       style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" 
       :class="{'active': form.language === 'ENG'}" 
       @click="form.language = 'ENG'"
@@ -311,9 +356,11 @@
     </label>
     <label 
       class="tab-option" 
+      tabIndex="24" 
       style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" 
       :class="{'active': form.language === 'CHI'}" 
       @click="form.language = 'CHI'"
+      
     >
       CHI
     </label>
@@ -326,6 +373,7 @@
       v-model="form.refuseSms" 
       type="checkbox" 
       class="form-check-input me-2" 
+      tabIndex="23" 
     />
     <label for="refuseSms" class="form-check-label">Refuse SMS</label>
   </div>
@@ -367,6 +415,7 @@
         type="text" 
         class="form-control" 
         placeholder="Next of Kin Name"
+        tabIndex="22" 
          
       />
     </div>
@@ -378,6 +427,7 @@
         type="text" 
         class="form-control" 
         placeholder="Relation"
+        tabIndex="21" 
          
       />
     </div>
@@ -389,6 +439,7 @@
         type="text" 
         class="form-control" 
         placeholder="Contact Number"
+        tabIndex="20" 
          
       />
     </div>
@@ -401,6 +452,7 @@
         type="text" 
         class="form-control" 
         placeholder="SMS"
+        tabIndex="19" 
          
       />
     </div>
@@ -413,6 +465,7 @@
         type="text" 
         class="form-control" 
         placeholder="Remarks"
+        tabIndex="18" 
          
       />
     </div>
@@ -430,6 +483,7 @@
         type="text" 
         class="form-control" 
         placeholder="Next of Kin Name"
+        tabIndex="17" 
          
       />
     </div>
@@ -441,6 +495,8 @@
         type="text" 
         class="form-control" 
         placeholder="Relation"
+
+        tabIndex="16" 
          
       />
     </div>
@@ -452,6 +508,7 @@
         type="text" 
         class="form-control" 
         placeholder="Contact Number"
+        tabIndex="15" 
          
       />
     </div>
@@ -464,6 +521,7 @@
         type="text" 
         class="form-control" 
         placeholder="SMS"
+        tabIndex="14" 
          
       />
     </div>
@@ -476,6 +534,7 @@
         type="text" 
         class="form-control" 
         placeholder="Remarks"
+        tabIndex="13" 
          
       />
     </div>
@@ -492,6 +551,7 @@
         type="text" 
         class="form-control" 
         placeholder="Next of Kin Name"
+        tabIndex="12" 
          
       />
     </div>
@@ -503,6 +563,7 @@
         type="text" 
         class="form-control" 
         placeholder="Relation"
+        tabIndex="11" 
          
       />
     </div>
@@ -514,6 +575,7 @@
         type="text" 
         class="form-control" 
         placeholder="Contact Number"
+        tabIndex="10" 
          
       />
     </div>
@@ -526,6 +588,7 @@
         type="text" 
         class="form-control" 
         placeholder="SMS"
+        tabIndex="9" 
          
       />
     </div>
@@ -537,6 +600,7 @@
         type="text" 
         class="form-control" 
         placeholder="Remarks"
+        tabIndex="8" 
          
       />
     </div>
@@ -548,7 +612,7 @@
   
   <!-- Sensitive Patient Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input id="sensitive-patient" type="checkbox" />
+    <input id="sensitive-patient"  tabIndex="7" type="checkbox" />
     <label for="sensitive-patient" style="margin-left: 8px;">Sensitive Patient</label>
   </div>
 </div>
@@ -556,13 +620,13 @@
 <div class="col-12" style="display: flex; justify-content: space-between;">
   <!-- Outstanding Bill Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input id="outstanding-bill" type="checkbox" />
+    <input  id="outstanding-bill" tabIndex="6"  type="checkbox" />
     <label for="outstanding-bill" style="margin-left: 8px;">Outstanding Bill</label>
   </div>
   
   <!-- Persona non grata Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input id="persona-non-grata" type="checkbox" />
+    <input id="persona-non-grata"  tabIndex="4" type="checkbox" />
     <label for="persona-non-grata" style="margin-left: 8px;">Persona non grata</label>
   </div>
 </div>
@@ -572,13 +636,13 @@
   <div class="col-6">
     <div class="reason-box">
     
-      <textarea id="reason1" class="reason-input" placeholder="Reason"></textarea>
+      <textarea  id="reason1" tabIndex="5" class="reason-input" placeholder="Reason"></textarea>
     </div>
   </div>
   <div class="col-6">
     <div class="reason-box">
     
-      <textarea id="reason2" class="reason-input" placeholder="Reason"></textarea>
+      <textarea id="reason2" class="reason-input" tabIndex="3"  placeholder="Reason"></textarea>
     </div>
   </div>
 </div>
@@ -590,8 +654,8 @@
             <!-- Button Section -->
 <div class="form-group d-flex justify-content-end">
   <!-- Create Form: Cancel and Save buttons on the right -->
-   <button v-if="formMode === 'create'" type="submit" class="cancel-btn rounded-xl">Cancel</button>
-    <button v-if="formMode === 'create'" type="submit" class="save-btn ms-2 rounded-xl">Save</button>
+   <button v-if="formMode === 'create'" tabIndex="2"  type="submit" class="cancel-btn rounded-xl">Cancel</button>
+    <button  v-if="formMode === 'create'"  tabIndex="1" type="submit" class="save-btn ms-2 rounded-xl">Save</button>
 
   <!-- Edit Form: Edit button on the left, Cancel button on the right -->
   <button v-if="formMode === 'edit'" type="button" class="btn btn-outline-primary me-auto" @click="submitForm">

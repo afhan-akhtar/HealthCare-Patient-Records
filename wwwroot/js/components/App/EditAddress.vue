@@ -3,7 +3,7 @@
     <div :class="modalContentClass" class="modal-content">
       <div class="modal-header pb-2">
         <h3>Address Input</h3>
-        <button class="close-btn" @click="closeForm">&times;</button>
+        <button   tabindex="-1" class="close-btn" @click="closeForm">&times;</button>
       </div>
       <div class="modal-body">
         <form @submit.prevent="submitForm">
@@ -242,7 +242,7 @@
 
           <!-- Button Section -->
           <div class="form-group d-flex justify-content-end">
-            <button type="button" class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
+            <button    tabindex="-1" type="button" class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
             <button  type="submit" class="save-btn ms-2 rounded-xl" @click="submitForm">Confirm</button>
           </div>
         </form>
