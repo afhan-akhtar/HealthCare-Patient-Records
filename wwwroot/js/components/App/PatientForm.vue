@@ -17,7 +17,7 @@
 <div class="form-group row">
   <!-- Dropdown (Select) in col-4 with dropdown icon inside input -->
   <div class="col-4">
-  <label for="document-type">Document No.<span class="red">*</span></label>
+  <label class="mb-1" for="document-type ">Document No.<span class="red">*</span></label>
   <div class="position-relative">
     <input
   id="document-type"
@@ -177,9 +177,10 @@
 </div>
 
 
-<div class="form-group" style="display: flex; gap: 10px;">
-    <div class="col-4">
-  <label for="document-type">Mobile<span class="red">*</span></label>
+<div class="form-group" style="display: flex; gap: 10px; align-items: center;">
+  <div class="col-6 d-flex " style="padding:0px; margin-top: -16px;">
+    <div class="col-4" style="padding:0px;">
+  <label class="mb-1" for="document-type">Mobile<span class="red">*</span></label>
   <div class="position-relative">
     <input
   id="mobile-no"
@@ -199,7 +200,7 @@
 </div>
 
   <!-- Input Text in col-8 with flex -->
-  <div class="col-8 d-flex position-relative">
+  <div class="col-8 p-0 d-flex position-relative">
   
     <input 
       id="Mobile" 
@@ -218,6 +219,7 @@
       &times;
     </span>
   </div>
+  </div>
 
   <div class="col-6">
     <label for="tel">Tel No. (Home)</label>
@@ -235,7 +237,16 @@
 
 <div style="display: flex; justify-content: space-between;">
   <h3>Address</h3>
-  <button tabIndex="30"   type="button"  class="save-btn ms-2 rounded-xl" @click="openAddressModal">Edit Address</button>
+  <button
+  tabIndex="30"
+  type="button"
+  class="save-btn ms-2 rounded-xl d-flex align-items-center"
+  @click="openAddressModal"
+>
+  <img src="js/assets/icons/picture13.svg" alt="Edit Icon" class="me-2" style="width: 18px;" />
+  <span>Edit Address</span>
+</button>
+
 </div>
 
   <edit-address 
@@ -318,7 +329,7 @@
       <input 
         id="marketingPurpose" 
         v-model="form.marketingPurpose" 
-        type="checkbox" 
+        type="checkbox" style="width: auto;" 
         class="form-check-input me-1" 
         tabIndex="27" 
       />
@@ -329,7 +340,7 @@
       <input 
         id="cancelSubscription" 
         v-model="form.cancelSubscription" 
-        type="checkbox" 
+        type="checkbox" style="width: auto;" 
         class="form-check-input me-1" 
         tabIndex="26" 
       />
@@ -341,9 +352,10 @@
 
 
 
- <div class="row col-6 d-flex align-items-center justify-content-between">
+ <div class="row col-6 d-flex align-items-center justify-content-between ms-1">
   <!-- Tabs as buttons for ENG and CHI -->
     <label for="smsLanguage" class="d-block mb-2">SMS Language & Option<span class="red">*</span></label>
+    <div class="row d-flex">
   <div class="tabs" style="display: flex; gap: 10px;">
     <label 
       class="tab-option" 
@@ -371,12 +383,13 @@
     <input 
       id="refuseSms" 
       v-model="form.refuseSms" 
-      type="checkbox" 
+      type="checkbox" style="width: auto;" 
       class="form-check-input me-2" 
       tabIndex="23" 
     />
     <label for="refuseSms" class="form-check-label">Refuse SMS</label>
   </div>
+</div>
 </div>
 
 
@@ -408,7 +421,6 @@
   <div class="col-4">
     <h6>Next of Kin 1<span class="red">*</span></h6>
     <div class="form-group mb-2">
-      
       <input 
         id="kin1-name" 
         v-model="form.nextOfKin1Name" 
@@ -608,11 +620,11 @@
     
   </div>
        <div class="col-12">
-  <h3>Special Status</h3>
+  <h3 class="mb-3">Special Status</h3>
   
   <!-- Sensitive Patient Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input id="sensitive-patient"  tabIndex="7" type="checkbox" />
+    <input id="sensitive-patient"  tabIndex="7" type="checkbox" style="width: auto;" />
     <label for="sensitive-patient" style="margin-left: 8px;">Sensitive Patient</label>
   </div>
 </div>
@@ -620,13 +632,13 @@
 <div class="col-12" style="display: flex; justify-content: space-between;">
   <!-- Outstanding Bill Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input  id="outstanding-bill" tabIndex="6"  type="checkbox" />
+    <input  id="outstanding-bill" tabIndex="6"  type="checkbox" style="width: auto;" />
     <label for="outstanding-bill" style="margin-left: 8px;">Outstanding Bill</label>
   </div>
   
   <!-- Persona non grata Checkbox -->
   <div style="display: flex; align-items: center;">
-    <input id="persona-non-grata"  tabIndex="4" type="checkbox" />
+    <input id="persona-non-grata"  tabIndex="4" type="checkbox" style="width: auto;" />
     <label for="persona-non-grata" style="margin-left: 8px;">Persona non grata</label>
   </div>
 </div>
@@ -652,15 +664,32 @@
              
             </div>
             <!-- Button Section -->
-<div class="form-group d-flex justify-content-end">
+<div class="form-group d-flex justify-end">
   <!-- Create Form: Cancel and Save buttons on the right -->
    <button v-if="formMode === 'create'" tabIndex="2"  type="submit" class="cancel-btn rounded-xl">Cancel</button>
-    <button  v-if="formMode === 'create'"  tabIndex="1" type="submit" class="save-btn ms-2 rounded-xl">Save</button>
+  <button
+  v-if="formMode === 'create'"
+  tabIndex="1"
+  type="submit"
+  class="save-btn ms-2 rounded-xl d-flex align-items-center"
+>
+  <img src="js/assets/icons/Picture14.svg" alt="Save Icon" class="me-2" style="width: 20px;" />
+  <span>Save</span>
+</button>
 
-  <!-- Edit Form: Edit button on the left, Cancel button on the right -->
-  <button v-if="formMode === 'edit'" type="button" class="btn btn-outline-primary me-auto" @click="submitForm">
-    Edit
-  </button>
+
+ 
+<button
+  v-if="formMode === 'edit'"
+  type="button"
+  class="btn btn-outline-primary me-auto editBtn d-flex align-items-center"
+  @click="submitForm"
+>
+  <img src="js/assets/icons/Picture13.svg" alt="Edit Icon" class="me-2" style="width: 25px;" />
+  <span>Edit</span>
+</button>
+
+
   <button v-if="formMode === 'edit'" type="submit" class="cancel-btn rounded-xl">Cancel</button>
 </div>
 
@@ -906,6 +935,7 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.875rem; /* Smaller font size */
+  color: #333333 !important;
 
 }
 
@@ -953,15 +983,7 @@ label{
    font-size: 12px;
    color: #7B7B7B;
 }
-#sensitive-patient{
-   width: 2% !important;
-}
-#outstanding-bill{
-   width: 10% !important;
-}
-#persona-non-grata{
-    width: 10% !important;
-}
+
 
 
 .reason-box {
@@ -996,8 +1018,11 @@ label{
 ::placeholder{
    font-size: 12px;
 }
-h3, h4 {
-   font-size: 14px;
+h3{
+   font-size: 18px;
+}
+h4{
+  font-size: 16px;
 }
 h6{
    color: #7B7B7B !important;

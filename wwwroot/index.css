@@ -669,7 +669,7 @@ a[title='Powered by marker.js'] {
 }
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   font-weight: bold;
 }
 input, textarea {
@@ -805,3 +805,16 @@ font-weight: 500;
   font-size: 14px;
 }
 }
+
+
+.editBtn{
+  background-color: #ec6161 !important;
+  color: #ffffff !important;
+  border-radius: 25px !important;
+  width: 100px !important;
+  padding: 6px;
+
+}
+ input[type="checkbox"] {
+    accent-color: #FFC553; /* Change to your desired color */
+  }

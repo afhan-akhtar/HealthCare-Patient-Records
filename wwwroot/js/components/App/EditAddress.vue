@@ -18,7 +18,7 @@
                       v-model="isSeparateMailingAddress" 
                       type="checkbox" 
                       class="form-check-input"
-                      style="width: 20px;"
+                      style="width: auto;"
                     />
                     <label for="separate-mailing-address" class="form-check-label ml-2">
                       Separate Mailing Address
@@ -241,7 +241,7 @@
           </div>
 
           <!-- Button Section -->
-          <div class="form-group d-flex justify-content-end">
+          <div class="form-group d-flex justify-end">
             <button    tabindex="-1" type="button" class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
             <button  type="submit" class="save-btn ms-2 rounded-xl" @click="submitForm">Confirm</button>
           </div>
