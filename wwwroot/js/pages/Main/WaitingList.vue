@@ -28,7 +28,7 @@
             </template>
             <template #prepend>
               <div class="d-flex align-center">
-                <span>Eng Name</span>
+                <span class="engName">Eng Name</span>
                 <v-btn icon>
                   <v-icon>mdi-menu-down</v-icon>|
                 </v-btn>

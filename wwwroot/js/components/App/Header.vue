@@ -23,44 +23,41 @@
         <img v-if="isMini" src="js/assets/icons/collapsible icon.png" />
       </div>
 
-    <!-- Menu Buttons -->
-<div class="d-flex flex-column align-start w-100">
-  <v-btn
-    :outlined="!isMini"
-    color="#2096F3"
-    class="mb-2 rounded d-flex align-center justify-start"
-    :style="{
-      backgroundColor: isMini ? 'white' : '',
-      boxShadow: isMini ? 'none' : '',
-      border: isMini ? 'none' : '2px solid #2096F3'
-    }"
-    @click="toggleSidebar"
-  >
-    <img
-      src="js/assets/icons/Picture1.svg"
-      alt="Menu Icon"
-      style="width: 20px; height: 20px; margin-right: 10px;"
-    />
-    <span v-if="!isMini" class="text-truncate">Collapse Menu</span>
-  </v-btn>
+      <!-- Menu Buttons -->
+      <div class="d-flex flex-column align-start w-100">
+        <v-btn
+          :outlined="!isMini"
+          color="#2096F3"
+          class="mb-2 rounded d-flex align-center justify-start"
+          :style="{
+            backgroundColor: isMini ? 'white' : '',
+            boxShadow: isMini ? 'none' : '',
+            border: isMini ? 'none' : '2px solid #2096F3'
+          }"
+          @click="toggleSidebar"
+        >
+          <img
+            src="js/assets/icons/Picture1.svg"
+            alt="Menu Icon"
+            style="width: 20px; height: 20px; margin-right: 10px;"
+          />
+          <span v-if="!isMini" class="text-truncate">Collapse Menu</span>
+        </v-btn>
 
-
-
-       <v-btn
-  class="mb-2 rounded-xl shadow-none d-flex align-center justify-start"
-  style="width: 100%;"
-  :style="isMini ? { backgroundColor: 'white', boxShadow: 'none' } : {}"
->
-  <img
-    src="js/assets/icons/Picture9.svg"
-    alt="Menu Icon"
-    style="width: 20px; height: 20px; margin-right: 10px;"
-  />
-  <span v-if="!isMini" class="text-truncate" style="color: #2096F3;">
-    Waiting List
-  </span>
-</v-btn>
-
+        <v-btn
+          class="mb-2 rounded-xl shadow-none d-flex align-center justify-start"
+          style="width: 100%;"
+          :style="isMini ? { backgroundColor: 'white', boxShadow: 'none' } : {}"
+        >
+          <img
+            src="js/assets/icons/Picture9.svg"
+            alt="Menu Icon"
+            style="width: 20px; height: 20px; margin-right: 10px;"
+          />
+          <span v-if="!isMini" class="text-truncate" style="color: #2096F3;">
+            Waiting List
+          </span>
+        </v-btn>
       </div>
 
       <div class="flex-grow-1"></div>
@@ -126,23 +123,35 @@
 export default {
   data() {
     return {
-      isMini: false, 
+      isMini: false,
+      isUserToggled: false, // Track if the user manually toggled the sidebar
     };
   },
   mounted() {
-    this.checkScreenSize(); 
-    window.addEventListener("resize", this.checkScreenSize); 
+    this.checkScreenSize();
+    window.addEventListener("resize", this.checkScreenSize);
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.checkScreenSize);
   },
   methods: {
     toggleSidebar() {
-      this.isMini = !this.isMini; 
+      this.isMini = !this.isMini;
+      this.isUserToggled = true; // Set flag when user toggles manually
+    },
+    checkScreenSize() {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth <= 1024 && !this.isUserToggled) {
+        this.isMini = true; // Apply mini-sidebar if the user hasn't toggled manually
+      } else if (screenWidth > 1024 && !this.isUserToggled) {
+        this.isMini = false; // Reset to full sidebar if above 1024px
+      }
     },
   },
 };
 </script>
+
 
 <style scoped>
 </style>

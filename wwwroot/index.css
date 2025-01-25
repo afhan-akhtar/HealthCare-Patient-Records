@@ -796,3 +796,12 @@ font-weight: 500;
   background-color: #F5F5F5 !important;
   border-radius: 25px !important;
 }
+
+@media (max-width: 1024px) {
+    .modal-content {
+ width: 95% !important;
+    }
+    .engName{
+  font-size: 14px;
+}
+}

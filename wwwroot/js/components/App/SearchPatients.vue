@@ -1,7 +1,11 @@
 <template>
   <div class="row ps-3" style="min-height: 80vh;">
     <!-- Patients list taking 9 columns or 12 columns based on patient data -->
-    <div :class="patients.length === 0 || !selectedPatientDetails ? 'col-12' : 'col-9 border-right'">
+     <div
+      :class="[
+        patients.length === 0 || !selectedPatientDetails ? 'col-12' : screenWidth <= 1024 ? 'col-7 border-right' : 'col-9 border-right',
+      ]"
+    >
       <div
         v-for="patient in patients"
         :key="patient.id"
@@ -38,7 +42,12 @@
     </div>
 
     <!-- Patient Details will only show if selectedPatientDetails is set and patients array is not empty -->
-    <div v-if="selectedPatientDetails && patients.length > 0" class="col-3 pt-0 ps-0" style="background-color: #F9F9F9;">
+  <div
+      v-if="selectedPatientDetails && patients.length > 0"
+      :class="[screenWidth <= 1024 ? 'col-5' : 'col-3']"
+      class="pt-0 ps-0"
+      style="background-color: #F9F9F9;"
+    >
       <v-container v-if="selectedPatientDetails" class="small-font">
         <div>
           <!-- Buttons Section -->
@@ -213,7 +222,14 @@ export default {
     return {
       selectedPatientDetails: null, // To store additional patient info
       selectedPatientId: null, // To store the selected patient ID
+       screenWidth: window.innerWidth,
     };
+  },
+    mounted() {
+    window.addEventListener('resize', this.updateScreenWidth);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateScreenWidth);
   },
   methods: {
     async fetchAdditionalInfo(id) {
@@ -231,6 +247,9 @@ export default {
       if (this.selectedPatientId) {
         this.$emit('view-patient-details', this.selectedPatientId); // Emit the ID when "Patient Details" button is clicked
       }
+    },
+     updateScreenWidth() {
+      this.screenWidth = window.innerWidth;
     },
   },
 };
