@@ -72,7 +72,7 @@
             <v-btn
               block
               icon
-              class="d-flex align-center justify-start rounded-xl pa-3"
+              class="d-flex align-center justify-start rounded-xl pa-3 mb-2"
               :style="isMini ? { border: 'none' } : { border: '2px solid #ec6161' }"
               @click="goToMessages"
             >
@@ -88,7 +88,7 @@
             <v-btn
               block
               icon
-              class="d-flex align-center justify-start pa-3"
+              class="d-flex align-center justify-start pa-3 users"
               :style="isMini ? { border: 'none' } : {}"
               @click="goToUsers"
             >
@@ -104,7 +104,7 @@
             <v-btn
               block
               icon
-              class="d-flex align-center justify-start pa-3"
+              class="d-flex align-center justify-start pa-3 users"
               :style="isMini ? { border: 'none' } : {}"
               @click="signOut"
             >

@@ -752,14 +752,29 @@ textarea {
   padding: 5px 10px;
   font-size: 12px;
 }
-.pointer{
-  cursor: pointer;
+
+.pointer {
+  position: relative;
+   cursor: pointer;
+ 
 }
-.pointer:hover{
-  border-color: #4080df !important;
-  border: 2px solid #4080df !important;
-  border-radius: 5px;
+
+.pointer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 5px; /* same as your hover */
+  transition: border-color 0.3s ease; /* smooth animation for hover */
 }
+
+.pointer:hover::after {
+  border-color: #4080df;
+}
+
 .patientname{
   font-size: 16px;
 font-weight: 500;
@@ -776,4 +791,8 @@ font-weight: 500;
   color: #4080DF !important;
   background-color: #ffffff !important;
   outline: 1px solid #4080DF !important;
+}
+.users:hover{
+  background-color: #F5F5F5 !important;
+  border-radius: 25px !important;
 }

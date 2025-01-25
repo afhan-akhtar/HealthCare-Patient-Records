@@ -24,7 +24,7 @@
   value="HKID"
   class="form-control pr-5"
   placeholder="HKID"
-  required
+  
   
 />
 
@@ -44,7 +44,7 @@
       type="text" 
       class="form-control pr-5" 
       placeholder="Document No"
-      required
+      
     />
     <!-- Cross Icon inside Input -->
     <span 
@@ -65,7 +65,7 @@
       type="text" 
       class="form-control" 
       placeholder="Surname"
-      required 
+       
     />
      <!-- Cross Icon inside Input -->
     <span 
@@ -85,7 +85,7 @@
       type="text" 
       class="form-control" 
       placeholder="Given Name"
-      required 
+       
     />
   </div>
 </div>
@@ -99,7 +99,7 @@
       type="text" 
       class="form-control" 
       placeholder="中文名 "
-      required 
+       
     />
   </div>
 
@@ -121,7 +121,7 @@
       type="date" 
       class="form-control pe-2" 
       placeholder="DD/M/YY"
-      required 
+       
     />
   </div>
 
@@ -133,7 +133,7 @@
       type="text" 
       class="form-control" 
       placeholder="Free Text"
-      required 
+       
     />
   </div>
 </div>
@@ -149,7 +149,7 @@
       type="text" 
       class="form-control" 
       placeholder="Nationality"
-      required 
+       
     />
   </div>
 
@@ -161,7 +161,7 @@
       type="text" 
       class="form-control" 
       placeholder="PR No."
-      required 
+       
     />
   </div>
 </div>
@@ -176,7 +176,7 @@
       type="text" 
       class="form-control" 
       placeholder=""
-      required 
+       
     />
   </div>
 
@@ -188,65 +188,72 @@
       type="text" 
       class="form-control" 
       placeholder="Free Text"
-      required 
+       
     />
   </div>
 </div>
 
 <div style="display: flex; justify-content: space-between;">
   <h3>Address</h3>
-  <button type="submit" class="save-btn ms-2 rounded-xl">Edit Address</button>
+  <button  type="button"  class="save-btn ms-2 rounded-xl" @click="openAddressModal">Edit Address</button>
 </div>
 
-    
-               <div class="form-group" style="display: flex; gap: 10px;">
+  <edit-address 
+    v-if="isAddressModalOpen" 
+    :address="address" 
+    @close="closeAddressModal" 
+    @save="saveAddress" 
+  />
+ <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Patient Address<span class="red">*</span></label>
-    <input 
-      id="surname" 
-      v-model="form.surname" 
-      type="text" 
+    <label for="patientAddress">Patient Address<span class="red">*</span></label>
+    <textarea 
+      id="patientAddress" 
+    :value="formattedPatientAddress"
       class="form-control" 
-      placeholder=""
-      required 
-    />
+      placeholder="Empty"
+       
+      style="width: 100%; height: 150px;" 
+    ></textarea>
   </div>
 
   <div class="col-6">
-    <label for="givenName">Mailing Address<span class="red">*</span></label>
-    <input 
-      id="givenName" 
-      v-model="form.givenName" 
-      type="text" 
+    <label for="mailingAddress">Mailing Address<span class="red">*</span></label>
+    <textarea 
+      id="mailingAddress" 
+       
       class="form-control" 
-      placeholder="Free Text"
-      required 
-    />
+      placeholder="Empty"
+       
+      style="width: 100%; height: 150px;" 
+            :value="formattedMailingAddress"
+    ></textarea>
   </div>
 </div>
+
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Remarks</label>
+    <label for="remarks">Remarks</label>
     <input 
-      id="surname" 
+      id="remarks" 
       v-model="form.surname" 
       type="text" 
       class="form-control" 
       placeholder=""
-      required 
+       
     />
   </div>
 
   <div class="col-6">
-    <label for="givenName">Email</label>
+    <label for="email">Email</label>
     <input 
-      id="givenName" 
+      id="email" 
       v-model="form.givenName" 
       type="text" 
       class="form-control" 
       placeholder="Free Text"
-      required 
+       
     />
   </div>
 
@@ -260,28 +267,70 @@
 
 <div class="form-group" style="display: flex; gap: 10px;">
   <div class="col-6 ps-0">
-    <label for="surname">Mailing List</label>
-    <input 
-      id="surname" 
-      v-model="form.surname" 
-      type="text" 
-      class="form-control" 
-      placeholder=""
-      required 
-    />
+  <!-- Heading in the first row -->
+  <label for="mailingList" class="d-block mb-2">Mailing List</label>
+
+  <!-- Flex row for checkboxes and labels -->
+  <div class="d-flex">
+    <div class="d-flex align-items-center me-3">
+      <input 
+        id="marketingPurpose" 
+        v-model="form.marketingPurpose" 
+        type="checkbox" 
+        class="form-check-input me-1" 
+      />
+      <label for="marketingPurpose" class="form-check-label">Marketing Purpose</label>
+    </div>
+    
+    <div class="d-flex align-items-center">
+      <input 
+        id="cancelSubscription" 
+        v-model="form.cancelSubscription" 
+        type="checkbox" 
+        class="form-check-input me-1" 
+      />
+      <label for="cancelSubscription" class="form-check-label">Cancel Subscription</label>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <div class="row col-6 d-flex align-items-center justify-content-between">
+  <!-- Tabs as buttons for ENG and CHI -->
+    <label for="smsLanguage" class="d-block mb-2">SMS Language & Option<span class="red">*</span></label>
+  <div class="tabs" style="display: flex; gap: 10px;">
+    <label 
+      class="tab-option" 
+      style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" 
+      :class="{'active': form.language === 'ENG'}" 
+      @click="form.language = 'ENG'"
+    >
+      ENG
+    </label>
+    <label 
+      class="tab-option" 
+      style="cursor: pointer; padding: 10px 15px; border: 1px solid #ccc; border-radius: 50px; text-align: center;" 
+      :class="{'active': form.language === 'CHI'}" 
+      @click="form.language = 'CHI'"
+    >
+      CHI
+    </label>
   </div>
 
-  <div class="col-6">
-    <label for="givenName">SMS Language& Option</label>
+  <!-- Refuse SMS -->
+  <div class="d-flex align-items-center ms-4">
     <input 
-      id="givenName" 
-      v-model="form.givenName" 
-      type="text" 
-      class="form-control" 
-      placeholder="Free Text"
-      required 
+      id="refuseSms" 
+      v-model="form.refuseSms" 
+      type="checkbox" 
+      class="form-check-input me-2" 
     />
+    <label for="refuseSms" class="form-check-label">Refuse SMS</label>
   </div>
+</div>
+
 
 
 
@@ -309,51 +358,66 @@
 <div class="row d-flex align-start">
   <!-- Kin 1 Section -->
   <div class="col-4">
-    <h6>Next of Kin 1</h6>
+    <h6>Next of Kin 1<span class="red">*</span></h6>
     <div class="form-group mb-2">
       
       <input 
         id="kin1-name" 
-        v-model="form.kin1Name" 
+        v-model="form.nextOfKin1Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin Name"
-        required 
-      />
-    </div>
-    <div class="form-group mb-2">
-  
-      <input 
-        id="kin1-contact" 
-        v-model="form.kin1Contact" 
-        type="text" 
-        class="form-control" 
-        placeholder="Contact Number"
-        required 
+        placeholder="Next of Kin Name"
+         
       />
     </div>
     <div class="form-group mb-2">
    
       <input 
         id="kin1-relation" 
-        v-model="form.kin1Relation" 
+        v-model="form.nextOfKin1RelationshipId" 
         type="text" 
         class="form-control" 
         placeholder="Relation"
-        required 
+         
       />
     </div>
     <div class="form-group mb-2">
+  
+      <input 
+        id="kin1-contact" 
+        v-model="form.nextOfKin1ContactNumber" 
+        type="text" 
+        class="form-control" 
+        placeholder="Contact Number"
+         
+      />
+    </div>
+    
+    <div class="form-group mb-2">
      
-      <textarea 
-        id="kin1-address" 
-        v-model="form.kin1Address" 
+     <input 
+        id="kin1-sms" 
+        v-model="form.nextOfKin1SmsNumber" 
+        type="text" 
+        class="form-control" 
+        placeholder="SMS"
+         
+      />
+    </div>
+
+    <div class="form-group mb-2">
+     
+   <input 
+        id="kin1-remarks" 
+        v-model="form.nextOfKin1Remark" 
+        type="text" 
         class="form-control" 
         placeholder="Remarks"
-        required
-      ></textarea>
+         
+      />
     </div>
   </div>
+  
 
   <!-- Kin 2 Section -->
   <div class="col-4">
@@ -362,44 +426,58 @@
  
       <input 
         id="kin2-name" 
-        v-model="form.kin2Name" 
+        v-model="form.nextOfKin2Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin Name"
-        required 
+        placeholder="Next of Kin Name"
+         
+      />
+    </div>
+     <div class="form-group mb-2">
+  
+      <input 
+        id="kin2-relation" 
+        v-model="form.nextOfKin2RelationshipId" 
+        type="text" 
+        class="form-control" 
+        placeholder="Relation"
+         
       />
     </div>
     <div class="form-group mb-2">
       
       <input 
         id="kin2-contact" 
-        v-model="form.kin2Contact" 
+        v-model="form.nextOfKin2ContactNumber" 
         type="text" 
         class="form-control" 
         placeholder="Contact Number"
-        required 
+         
       />
     </div>
-    <div class="form-group mb-2">
-  
-      <input 
-        id="kin2-relation" 
-        v-model="form.kin2Relation" 
-        type="text" 
-        class="form-control" 
-        placeholder="Relation"
-        required 
-      />
-    </div>
+   
     <div class="form-group mb-2">
       
-      <textarea 
-        id="kin2-address" 
-        v-model="form.kin2Address" 
+     <input 
+        id="kin2-sms" 
+        v-model="form.nextOfKin2SmsNumber" 
+        type="text" 
+        class="form-control" 
+        placeholder="SMS"
+         
+      />
+    </div>
+
+     <div class="form-group mb-2">
+      
+     <input 
+        id="kin2-remark" 
+        v-model="form.nextOfKin2Remark" 
+        type="text" 
         class="form-control" 
         placeholder="Remarks"
-        required
-      ></textarea>
+         
+      />
     </div>
   </div>
 
@@ -410,44 +488,57 @@
       
       <input 
         id="kin3-name" 
-        v-model="form.kin3Name" 
+        v-model="form.nextOfKin3Name" 
         type="text" 
         class="form-control" 
-        placeholder="Enter Kin Name"
-        required 
+        placeholder="Next of Kin Name"
+         
+      />
+    </div>
+      <div class="form-group mb-2">
+      
+      <input 
+        id="kin3-relation" 
+        v-model="form.nextOfKin3RelationshipId" 
+        type="text" 
+        class="form-control" 
+        placeholder="Relation"
+         
       />
     </div>
     <div class="form-group mb-2">
      
       <input 
         id="kin3-contact" 
-        v-model="form.kin3Contact" 
+        v-model="form.nextOfKin3ContactNumber" 
         type="text" 
         class="form-control" 
         placeholder="Contact Number"
-        required 
+         
+      />
+    </div>
+  
+    <div class="form-group mb-2">
+      
+      <input 
+        id="kin3-sms" 
+        v-model="form.nextOfKin3SmsNumber" 
+        type="text" 
+        class="form-control" 
+        placeholder="SMS"
+         
       />
     </div>
     <div class="form-group mb-2">
       
       <input 
-        id="kin3-relation" 
-        v-model="form.kin3Relation" 
+        id="kin3-remarks" 
+        v-model="form.nextOfKin3Remark" 
         type="text" 
         class="form-control" 
-        placeholder="Relation"
-        required 
-      />
-    </div>
-    <div class="form-group mb-2">
-      
-      <textarea 
-        id="kin3-address" 
-        v-model="form.kin3Address" 
-        class="form-control" 
         placeholder="Remarks"
-        required
-      ></textarea>
+         
+      />
     </div>
 
     
@@ -519,7 +610,12 @@
 
 <script>
 import patientService from 'services/Patient.js';
+import EditAddress from 'components/App/EditAddress.vue';
 export default {
+   components: {
+   
+    'edit-address': EditAddress,
+  },
   props: {
     mode: String, // 'create' or 'edit'
     patient: Object,
@@ -529,6 +625,7 @@ export default {
       formMode: this.mode || 'create',
       form: this.patient || {},
       isModalOpen: true,
+        isAddressModalOpen: false,
       formData: {
         documentTypeId: 0,
         documentNumber: "",
@@ -588,16 +685,62 @@ export default {
         outstandingBillReason: "",
         isPersonaNonGrata: true,
         personaNonGrataReason: ""
-      }
+      },
+      address: {
+        residentStructureAddressZone: "",
+        residentStructureAddressDistrict: "",
+        residentStructureAddressSubdistrict: "",
+        residentStructureAddressStreet: "",
+        residentStructureAddressVillage: "",
+        residentStructureAddressEstate: "",
+        residentStructureAddressBlock: "",
+        residentStructureAddressFloor: "",
+        residentStructureAddressFlat: "",
+        mailingStructureAddressZone: "",
+        mailingStructureAddressDistrict: "",
+        mailingStructureAddressSubdistrict: "",
+        mailingStructureAddressStreet: "",
+        mailingStructureAddressVillage: "",
+        mailingStructureAddressEstate: "",
+        mailingStructureAddressBlock: "",
+        mailingStructureAddressFloor: "",
+        mailingStructureAddressFlat: "",
+    },
     };
     
   },
+  computed: {
+  formattedPatientAddress() {
+    // Check if address is defined and return the address formatted correctly
+    if (this.address && this.address.residentStructureAddressZone && this.address.residentStructureAddressDistrict) {
+      return `${this.address.residentStructureAddressZone}, ${this.address.residentStructureAddressDistrict}`;
+    }
+    return ''; // Return empty string if the address or properties are not defined
+  },
+  formattedMailingAddress() {
+    // Similarly handle the mailing address
+    if (this.address && this.address.mailingAddressZone && this.address.mailingAddressDistrict) {
+      return `${this.address.mailingAddressZone}, ${this.address.mailingAddressDistrict}`;
+    }
+    return ''; // Return empty string if not defined
+  }
+},
+
   methods: {
     closeForm() {
       this.isModalOpen = false;
       this.$emit('close');
     },
-    
+     openAddressModal() {
+      this.isAddressModalOpen = true;
+    },
+    closeAddressModal() {
+      this.isAddressModalOpen = false;
+    },
+     saveAddress(updatedAddress) {
+      this.address = updatedAddress;
+      this.isAddressModalOpen = false;
+    },
   async submitForm() {
   try {
     // If in 'edit' mode, fetch the patient details first using the patient ID
@@ -699,7 +842,7 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.875rem; /* Smaller font size */
-  height: 36px; /* Smaller height */
+
 }
 
 textarea {
