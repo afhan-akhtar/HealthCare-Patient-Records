@@ -816,5 +816,8 @@ font-weight: 500;
 
 }
  input[type="checkbox"] {
-    accent-color: #FFC553; /* Change to your desired color */
+    accent-color: #FB8F40; /* Change to your desired color */
+  }
+  .cross{
+    right:10px !important;
   }

@@ -8,10 +8,10 @@
       <div class="modal-body">
         <form @submit.prevent="submitForm">
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 pb-0">
               <h4 class="mb-3">Mailing Address Option</h4>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0">
                   <div class="form-check d-flex align-items-center">
                     <input 
                       id="separate-mailing-address" 
@@ -31,10 +31,10 @@
 
           <div class="row">
             <!-- Left column: Address -->
-            <div :class="isSeparateMailingAddress ? 'col-12 col-md-6' : 'col-12'">
+            <div class="pt-0" :class="isSeparateMailingAddress ? 'col-12 col-md-6' : 'col-12'">
               <h5 class="mb-3">Address</h5>
               <div class="form-group row">
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="zone">Zone</label>
                   <input 
                   
@@ -45,8 +45,14 @@
                     placeholder="Free Text"
                    
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="district">District</label>
                   <input 
                     id="district" 
@@ -56,185 +62,306 @@
                     class="form-control pr-5" 
                     placeholder="Free text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="sub-district">Sub-District</label>
                   <input
                     id="sub-district"
+                      v-model="address.residentStructureAddressSubdistrict"
                     class="form-control pr-5"
                     placeholder="Free Text"
                     required
+                    
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
-                  <label for="village">Street</label>
+                <div class="col-12 pt-0 position-relative">
+                  <label for="street">Street</label>
                   <input
-                    id="village"
+                    id="street"
+                       v-model="address.residentStructureAddressStreet"
                     class="form-control pr-5"
                     placeholder="Free Text"
                     required
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="village">Village</label>
                   <input 
                     id="village" 
+                            v-model="address.residentStructureAddressVillage"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="estate">Estate</label>
                   <input 
                     id="estate" 
+                     v-model="address.residentStructureAddressEstate"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="block-building">Block/ Building Others (Non-Residential)</label>
                   <input 
+                  
                     id="block-building" 
+                     v-model="address.residentStructureAddressBlock"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <!-- Floor and Flat Inputs -->
               <div class="form-group row">
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="floor">Floor</label>
                   <input 
                     id="floor" 
+                    
+                    v-model="address.residentStructureAddressFloor"
                     type="text" 
                     class="form-control pr-5" 
-                    placeholder="Floor"
+                    placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="flat">Flat</label>
                   <input 
                     id="flat" 
+                     v-model="address.residentStructureAddressFlat"
                     type="text" 
                     class="form-control pr-5" 
-                    placeholder="Flat"
+                    placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
             </div>
 
             <!-- Conditional Mailing Address -->
-            <div v-if="isSeparateMailingAddress" class="col-12 col-md-6">
+            <div   v-if="isSeparateMailingAddress" class="col-12 col-md-6 pt-0">
               <h5 class="mb-3">Mailing Address</h5>
 
               <!-- Mailing Address Fields -->
               <div class="form-group row">
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="mailing-zone">Zone</label>
                   <input 
                     id="mailing-zone" 
+                       v-model="address.mailingStructureAddressZone"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="mailing-district">District</label>
                   <input 
                     id="mailing-district" 
+                      v-model="address.mailingStructureAddressDistrict"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="mailing-sub-district">Sub-District</label>
                   <input
                     id="mailing-sub-district"
+                             v-model="address.mailingStructureAddressSubdistrict"
                     class="form-control pr-5"
                     placeholder="Free Text"
                     required
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
-                  <label for="mailing-village">Street</label>
+                <div class="col-12 pt-0 position-relative">
+                  <label for="mailing-street">Street</label>
                   <input
-                    id="mailing-village"
+                    id="mailing-street"
+                     v-model="address.mailingStructureAddressStreet"
                     class="form-control pr-5"
                     placeholder="Free Text"
                     required
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="mailing-village">Village</label>
                   <input 
                     id="mailing-village" 
+                      v-model="address.mailingStructureAddressVillage"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="mailing-estate">Estate</label>
                   <input 
                     id="mailing-estate" 
+                           v-model="address.mailingStructureAddressEstate"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-12">
+                <div class="col-12 pt-0 position-relative">
                   <label for="mailing-block-building">Block/ Building Others (Non-Residential)</label>
                   <input 
                     id="mailing-block-building" 
+                    v-model="address.mailingStructureAddressBlock"
                     type="text" 
                     class="form-control pr-5" 
                     placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
               <!-- Floor and Flat Inputs -->
               <div class="form-group row">
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="mailing-floor">Floor</label>
                   <input 
                     id="mailing-floor" 
+                     v-model="address.mailingStructureAddressFloor"
                     type="text" 
                     class="form-control pr-5" 
-                    placeholder="Floor"
+                    placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 position-relative">
                   <label for="mailing-flat">Flat</label>
                   <input 
                     id="mailing-flat" 
+                         v-model="address.mailingStructureAddressFlat"
                     type="text" 
                     class="form-control pr-5" 
-                    placeholder="Flat"
+                    placeholder="Free Text"
                   />
+                  <span 
+      class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
+  
+    >
+      &times;
+    </span>
                 </div>
               </div>
             </div>
@@ -276,7 +403,9 @@ export default {
     },
     submitForm() {
       this.$emit('save', this.address); // Emit the updated address to the parent component
-    }
+    },
+    
+    
   },
 };
 </script>
@@ -296,7 +425,7 @@ textarea {
 
 .form-control {
   padding-right: 2rem;
-  font-size: 0.875rem;
+  font-size: 12px;
   height: 36px;
 }
 
