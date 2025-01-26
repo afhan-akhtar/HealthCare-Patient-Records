@@ -47,6 +47,7 @@
       v-if="isFormVisible"
       :mode="formMode"
       :patient="currentPatient"
+        :patient-id="selectedPatientId"
       @close="closeForm"
     />
   </div>

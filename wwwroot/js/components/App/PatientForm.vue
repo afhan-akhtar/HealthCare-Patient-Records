@@ -26,6 +26,7 @@
    tabIndex="44" 
     placeholder="HKID"
     readonly
+    :disabled="formMode === 'edit' && formFieldsDisabled"
   />
       <!-- Dropdown Icon -->
       <span
@@ -62,6 +63,7 @@
       placeholder="Document No"
       tabIndex="43" 
         :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <!-- Cross Icon inside Input -->
     <span 
@@ -84,6 +86,7 @@
       placeholder="Surname"
       tabIndex="42" 
        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+      :disabled="formMode === 'edit' && formFieldsDisabled"
        
     />
      <!-- Cross Icon inside Input -->
@@ -106,6 +109,7 @@
     placeholder="Given Name"
     tabIndex="41" 
       :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+      :disabled="formMode === 'edit' && formFieldsDisabled"
   />
   <!-- Cross Icon inside Input -->
   <span 
@@ -127,7 +131,7 @@
       class="form-control" 
       placeholder="中文名 "
       tabIndex="40" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -148,6 +152,7 @@
     { 
       'border-red': isFieldInvalid, 
       'active': form.sex === 'Male' || form.sex === 'Female'
+      
     }
   ]"
 >
@@ -158,6 +163,7 @@
       type="radio" 
       value="Male" 
       style="display: none;" 
+      :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     Male
   </label>
@@ -169,6 +175,7 @@
     { 
       'border-red': isFieldInvalid, 
       'active': form.sex === 'Female' 
+      
     }
   ]"
 >
@@ -177,6 +184,7 @@
       type="radio" 
       value="Female" 
       style="display: none;" 
+      :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     Female
   </label>
@@ -195,6 +203,7 @@
       placeholder="DD/M/YYYY"
       tabIndex="37" 
        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+       :disabled="formMode === 'edit' && formFieldsDisabled"
       
        
     />
@@ -209,7 +218,7 @@
       class="form-control" 
       placeholder="Free Text"
       tabIndex="36" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     
   </div>
@@ -227,7 +236,7 @@
       class="form-control" 
       placeholder="Nationality"
       tabIndex="35" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
   </div>
 
@@ -240,7 +249,7 @@
       class="form-control" 
       placeholder="PR No."
       tabIndex="34" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -263,6 +272,7 @@
   class="form-control pr-5"
   placeholder="+852"
   tabIndex="33" 
+  :disabled="formMode === 'edit' && formFieldsDisabled"
   
   
 />
@@ -285,6 +295,7 @@
       placeholder="Free Text"
       tabIndex="32" 
         :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :disabled="formMode === 'edit' && formFieldsDisabled"
       
     />
     <!-- Cross Icon inside Input -->
@@ -306,7 +317,7 @@
       class="form-control" 
       placeholder="Free Text"
       tabIndex="31" 
-       
+      :disabled="formMode === 'edit' && formFieldsDisabled" 
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -323,6 +334,7 @@
   tabIndex="30"
   type="button"
   class="save-btn ms-2 rounded-xl d-flex align-items-center"
+  :disabled="formMode === 'edit' && formFieldsDisabled"
   @click="openAddressModal"
 >
   <img src="js/assets/icons/picture13.svg" alt="Edit Icon" class="me-2" style="width: 18px;" />
@@ -346,7 +358,7 @@
       class="form-control" 
       placeholder="Empty"
         :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
       style="width: 100%; height: 150px;" 
     ></textarea>
   </div>
@@ -359,7 +371,7 @@
       class="form-control" 
       placeholder="Empty"
         :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
       style="width: 100%; height: 150px;" 
             :value="formattedMailingAddress"
     ></textarea>
@@ -377,7 +389,7 @@
       class="form-control" 
       placeholder="Free text"
       tabIndex="29" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -396,7 +408,7 @@
       class="form-control" 
       placeholder="Free Text"
       tabIndex="28" 
-       
+       :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -439,6 +451,7 @@
         type="checkbox" style="width: auto;" 
         class="form-check-input me-1" 
         tabIndex="26" 
+        :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <label for="cancelSubscription" class="form-check-label">Cancel Subscription</label>
     </div>
@@ -465,7 +478,7 @@
      v-model="form.smsLanguage" 
       type="radio" 
       value="Eng" 
-      
+      :disabled="formMode === 'edit' && formFieldsDisabled"
       style="display: none;" 
     />
     ENG
@@ -483,6 +496,7 @@
       type="radio" 
       value="Chi" 
       style="display: none;" 
+      :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     CHI
   </label>
@@ -496,6 +510,7 @@
       type="checkbox" style="width: auto;" 
       class="form-check-input me-2" 
       tabIndex="23" 
+      :disabled="formMode === 'edit' && formFieldsDisabled"
     />
     <label for="refuseSms" class="form-check-label">Refuse SMS</label>
   </div>
@@ -539,6 +554,7 @@
         placeholder="Next of Kin Name"
         tabIndex="22" 
           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :disabled="formMode === 'edit' && formFieldsDisabled"
          
       />
       <span 
@@ -558,6 +574,7 @@
         placeholder="Relationship"
         tabIndex="21" 
           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :disabled="formMode === 'edit' && formFieldsDisabled"
          
       />
     </div>
@@ -571,6 +588,7 @@
         placeholder="Contact Number"
         tabIndex="20" 
           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :disabled="formMode === 'edit' && formFieldsDisabled"
          
       />
       <span 
@@ -590,7 +608,7 @@
         class="form-control" 
         placeholder="SMS"
         tabIndex="19" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -609,6 +627,7 @@
         class="form-control" 
         placeholder="Remarks"
         tabIndex="18" 
+        :disabled="formMode === 'edit' && formFieldsDisabled"
          
       />
       <span 
@@ -633,7 +652,7 @@
         class="form-control" 
         placeholder="Next of Kin Name"
         tabIndex="17" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -652,6 +671,7 @@
         placeholder="Relationship"
 
         tabIndex="16" 
+        :disabled="formMode === 'edit' && formFieldsDisabled"
          
       />
     </div>
@@ -664,7 +684,7 @@
         class="form-control" 
         placeholder="Contact Number"
         tabIndex="15" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -683,7 +703,7 @@
         class="form-control" 
         placeholder="SMS"
         tabIndex="14" 
-         
+        :disabled="formMode === 'edit' && formFieldsDisabled" 
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -702,7 +722,7 @@
         class="form-control" 
         placeholder="Remarks"
         tabIndex="13" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -725,7 +745,7 @@
         class="form-control" 
         placeholder="Next of Kin Name"
         tabIndex="12" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -743,7 +763,7 @@
         class="form-control" 
         placeholder="Relationship"
         tabIndex="11" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
     </div>
     <div class="form-group mb-2 position-relative">
@@ -755,7 +775,7 @@
         class="form-control" 
         placeholder="Contact Number"
         tabIndex="10" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -774,7 +794,7 @@
         class="form-control" 
         placeholder="SMS"
         tabIndex="9" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -792,7 +812,7 @@
         class="form-control" 
         placeholder="Remarks"
         tabIndex="8" 
-         
+         :disabled="formMode === 'edit' && formFieldsDisabled"
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
@@ -815,6 +835,7 @@
     tabIndex="7" 
     type="checkbox" 
     style="width: auto;" 
+    :disabled="formMode === 'edit' && formFieldsDisabled"
   />
   <label for="sensitive-patient" style="margin-left: 8px;">
     Sensitive Patient
@@ -830,6 +851,7 @@
     tabIndex="6" 
     type="checkbox" 
     style="width: auto;" 
+    :disabled="formMode === 'edit' && formFieldsDisabled"
   />
   <label for="outstanding-bill" style="margin-left: 8px;">
     Outstanding Bill
@@ -843,6 +865,7 @@
     tabIndex="4" 
     type="checkbox" 
     style="width: auto;" 
+    :disabled="formMode === 'edit' && formFieldsDisabled"
   />
   <label for="persona-non-grata" style="margin-left: 8px;">
     Persona non grata
@@ -855,13 +878,13 @@
   <div class="col-6">
     <div class="reason-box">
     
-      <textarea  id="outstandingReason" v-modal="form.outstandingBillReason" tabIndex="5" class="reason-input" placeholder="Reason"></textarea>
+      <textarea id="outstandingReason" v-modal="form.outstandingBillReason" :disabled="formMode === 'edit' && formFieldsDisabled" tabIndex="5" class="reason-input" placeholder="Reason"></textarea>
     </div>
   </div>
   <div class="col-6">
     <div class="reason-box">
     
-      <textarea id="personaReason" v-model="form.personaNonGrataReason"  class="reason-input" tabIndex="3"  placeholder="Reason"></textarea>
+      <textarea  id="personaReason" v-model="form.personaNonGrataReason" :disabled="formMode === 'edit' && formFieldsDisabled"  class="reason-input" tabIndex="3"  placeholder="Reason"></textarea>
     </div>
   </div>
 </div>
@@ -870,35 +893,77 @@
 
              
             </div>
+
+<!-- Confirmation Modal with Modal Overlay -->
+<div v-if="showConfirmationPopup" class="modal-overlay">
+  <div id="confirmationModal" class="modal fade" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true" style="font-size:18px;">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 100%;">
+        <div class="modal-header" style="border:none">
+          <h5 id="confirmationModalLabel" class="modal-title">Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeConfirmationPopup"></button>
+        </div>
+        <div class="modal-body" style="font-size: medium;">
+          <p>Are you sure to cancel without save?</p>
+        </div>
+        <div class="modal-footer d-flex justify-end">
+          <button type="button" class="btn btn-outline-secondary cancel-btn rounded-xl" data-bs-dismiss="modal" @click="closeConfirmationPopup">Back</button>
+       <button  type="submit" class="save-btn ms-2 rounded-xl" @click="cancelFormChanges">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Toast Container -->
+<div
+  v-if="showToast"
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+  aria-live="polite"
+  aria-atomic="true"
+  style="z-index: 1050;"
+>
+  <div
+    class="toast align-items-center text-bg-success border-0"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        Profile updated successfully!
+      </div>
+      <button type="button" class="btn-close btn-close-white ms-2 m-auto" @click="closeToast"></button>
+    </div>
+  </div>
+</div>
+
             <!-- Button Section -->
 <div class="form-group d-flex justify-end">
-  <!-- Create Form: Cancel and Save buttons on the right -->
-   <button v-if="formMode === 'create'" tabIndex="2" type="submit"  class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
-  <button
-  v-if="formMode === 'create'"
-  tabIndex="1"
-  type="submit"
-  class="save-btn ms-2 rounded-xl d-flex align-items-center"
->
-  <img src="js/assets/icons/Picture14.svg" alt="Save Icon" class="me-2" style="width: 20px;" />
-  <span>Save</span>
-</button>
+  <!-- Create Mode: Cancel and Save buttons -->
+  <button v-if="formMode === 'create'" tabIndex="2" type="button" class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
+  <button v-if="formMode === 'create'" tabIndex="1" type="button" class="save-btn ms-2 rounded-xl d-flex align-items-center" @click="submitForm">
+    <img src="js/assets/icons/Picture14.svg" alt="Save Icon" class="me-2" style="width: 20px;" />
+    <span>Save</span>
+  </button>
 
+  <!-- Edit Mode: Initially show Edit and Cancel buttons -->
+  <button v-if="formMode === 'edit' && !isEditing" type="button" class="btn btn-outline-primary me-auto editBtn d-flex align-items-center" @click="startEditing">
+    <img src="js/assets/icons/Picture13.svg" alt="Edit Icon" class="me-2" style="width: 25px;" />
+    <span>Edit</span>
+  </button>
 
  
-<button
-  v-if="formMode === 'edit'"
-  type="button"
-  class="btn btn-outline-primary me-auto editBtn d-flex align-items-center"
-  
->
-  <img src="js/assets/icons/Picture13.svg" alt="Edit Icon" class="me-2" style="width: 25px;" />
-  <span>Edit</span>
-</button>
 
+  <!-- Cancel button for both Create and Edit modes -->
+  <button v-if="formMode === 'edit'" type="button" class="cancel-btn rounded-xl" @click="confirmCancel">Cancel</button>
 
-  <button v-if="formMode === 'edit'" type="submit" class="cancel-btn rounded-xl" @click="closeForm">Cancel</button>
+   <!-- Edit Mode: Show Save and Cancel buttons after clicking Edit -->
+  <button v-if="formMode === 'edit' && isEditing" type="button" class="save-btn ms-2 rounded-xl d-flex align-items-center" @click="submitForm">
+    <img src="js/assets/icons/Picture14.svg" alt="Save Icon" class="me-2" style="width: 20px;" />
+    <span>Save</span>
+  </button>
 </div>
+
 
            
           </form>
@@ -916,13 +981,19 @@ export default {
    
     'edit-address': EditAddress,
   },
-  props: {
-    mode: String, // 'create' or 'edit'
+   props: {
+    mode: String,
     patient: Object,
+    patientId: String,  // Add the patientId prop
   },
   data() {
     return {
+          showToast: false, // Controls toast visibility
+    toastTimeout: null,
+      showConfirmationPopup: false,
           isFieldInvalid: false,
+          isEditing: false, // Tracks whether the user is editing in 'edit' mode
+    formFieldsDisabled: true,
          isDropdownOpen: false, // Tracks if dropdown is open
       selectedOption: "HKID", // The default option
       formMode: this.mode || 'create',
@@ -1086,48 +1157,95 @@ formattedMailingAddress() {
     this.isFieldInvalid = true;
   }
 },
+ // Method to cancel the form and show confirmation popup
+  confirmCancel() {
+    if (this.isEditing) {
+      this.showConfirmationPopup = true; // Show the confirmation dialog when editing
+    } else {
+      this.closeForm(); // Close the form immediately in create mode
+    }
+  },
+   // Method to close the confirmation popup without canceling
+  closeConfirmationPopup() {
+    this.showConfirmationPopup = false; // Close the confirmation dialog
+  },
 
+  // Method to confirm cancellation (discard changes)
+  cancelFormChanges() {
+    this.closeForm(); // Reset form and close confirmation
+    this.showConfirmationPopup = false; // Close the confirmation dialog
+  },
+  showSuccessToast() {
+    this.showToast = true;
 
-   async submitForm() {
-    try {
-      // Validate the field before submitting
+    // Automatically hide the toast after 3 seconds
+    this.toastTimeout = setTimeout(() => {
+      this.closeToast();
+    }, 3000);
+  },
+
+  // Close the toast and clear the timer
+  closeToast() {
+    this.showToast = false;
+
+    // Clear the timeout to prevent any pending timer issues
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+      this.toastTimeout = null;
+    }
+  },
+
+async submitForm() {
+  try {
+    // Validate fields for 'create' mode
+    if (this.formMode === 'create') {
       this.validateField();
 
-      // If the field is invalid, don't proceed with form submission
       if (this.isFieldInvalid) {
-      
-        return;
+        return; // If the fields are invalid, don't proceed
       }
-
-      if (this.formMode === 'edit') {
-        // Fetch existing patient data for edit
-        const patientId = this.formData.id;
-        const patientData = await patientService.getPatient(patientId);
-
-        // Merge existing data with updated formData
-        const updatedPatientData = {
-          ...patientData,
-          ...this.flattenPayload(this.form), // Flatten the form data
-          ...this.flattenPayload(this.address), // Flatten the address
-        };
-
-        // Submit the updated data
-        const response = await patientService.editPatient(patientId, updatedPatientData);
-        console.log('Patient updated successfully:', response);
-      } else if (this.formMode === 'create') {
-        // Prepare flat payload for creating a new patient
-        const patientData = {
-          ...this.flattenPayload(this.form), // Flatten the form data
-          ...this.flattenPayload(this.address), // Flatten the address
-        };
-
-        // Submit the new patient data
-        const response = await patientService.createPatient(patientData);
-        console.log('Patient created successfully:', response);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
     }
+
+    // Handle data submission for 'edit' mode
+    if (this.formMode === 'edit') {
+      const patientId = this.patientId;
+      const patientData = await patientService.getPatient(patientId);
+
+      const updatedPatientData = {
+        ...patientData,
+        ...this.flattenPayload(this.form),
+        ...this.flattenPayload(this.address),
+      };
+
+      const response = await patientService.editPatient(patientId, updatedPatientData);
+      console.log('Patient updated successfully:', response);
+
+      // Show success toast after edit API success
+      this.showSuccessToast();
+    } else if (this.formMode === 'create') {
+      // Create new patient data
+      const patientData = {
+        ...this.flattenPayload(this.form),
+        ...this.flattenPayload(this.address),
+      };
+
+      const response = await patientService.createPatient(patientData);
+      console.log('Patient created successfully:', response);
+
+      // Show success toast after create API success
+      this.showSuccessToast();
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+},
+
+
+  // Method to enable editing mode (unlock fields)
+  startEditing() {
+    this.isEditing = true; // Switch to editing state
+    this.formMode = 'edit'; // Ensure we are in edit mode
+    this.formFieldsDisabled = false; // Enable the form fields for editing
   },
 
 // Helper function to flatten the payload

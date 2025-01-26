@@ -821,3 +821,7 @@ font-weight: 500;
   .cross{
     right:10px !important;
   }
+  [disabled] {
+    cursor: default;
+    background-color: #F1F1F1 !important;
+}
