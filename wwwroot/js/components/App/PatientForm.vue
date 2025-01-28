@@ -219,7 +219,7 @@
 
  <div class="col-6 px-3" style="padding: 0;">
       <label class="mb-1" for="occupation">
-        Occupation<span class="red">*</span>
+        Occupation
       </label>
       <div class="position-relative">
         <!-- Input Field -->
@@ -231,7 +231,7 @@
           tabIndex="36"
           readonly
           :disabled="formMode === 'edit' && formFieldsDisabled"
-             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+             :class="['form-control pr-5']"
         />
         <!-- Dropdown Icon -->
         <span
@@ -1641,7 +1641,7 @@ async submitForm() {
     this.isFieldInvalid = false;
 
     // Validate fields for 'create' mode
-    if (this.formMode === 'create') {
+    if (this.formMode === 'create || edit') {
       this.validateField();
 
       if (this.isFieldInvalid) {
