@@ -1,4 +1,5 @@
 const rootPath = 'https://webdev.tabnext.asia/api/FrontendInterview/v1/Patients';
+const configPath = 'https://webdev.tabnext.asia/api/FrontendInterview/v1/Configs';
 
 module.exports = {
   /**
@@ -66,33 +67,43 @@ module.exports = {
     }
   },
 
-  /**
-   * Create a new patient record
-   * @param {Object} patientData - The data for the new patient
-   * @return {Object} created patient record
-   */
-  async createPatient(patientData) {
-    try {
-      const response = await fetch(rootPath, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'api-version': '1.0',
-        },
-        body: JSON.stringify(patientData),
-      });
+ /**
+ * Create a new patient record
+ * @param {Object} patientData - The data for the new patient
+ * @return {Object|null} created patient record or null if no content returned
+ */
+async createPatient(patientData) {
+  try {
+    const response = await fetch(rootPath, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'api-version': '1.0',
+      },
+      body: JSON.stringify(patientData),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! status: ${response.status}`);
+    // }
 
-      return await response.json();
-    } catch (error) {
-      console.error('Error creating patient record:', error);
-      throw error;
+    // Handle 204 No Content
+    if (response.status === 204) {
+      console.log('Patient record created successfully with no content returned.');
+      return null;  // No content returned, so return null
     }
-  },
+
+    // If there is content, parse it as JSON (useful for other status codes)
+    const responseBody = await response.json();
+    return responseBody;
+
+  } catch (error) {
+    console.error('Error creating patient record:', error);
+    throw error;
+  }
+}
+,
 
   /**
    * Edit an existing patient record
@@ -112,16 +123,20 @@ module.exports = {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'api-version': '1.0',
         },
         body: JSON.stringify(patientData),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
+      // if (!response.ok) {
+      //   throw new Error(`HTTP error! status: ${response.status}`);
+      // }
+ // Handle 204 No Content
+    if (response.status === 200) {
+      console.log('Patient updated successfully with no content returned.');
+      return null;  // No content returned, so return null
+    }
       return await response.json();
     } catch (error) {
       console.error('Error editing patient record:', error);
@@ -160,4 +175,140 @@ module.exports = {
       throw error;
     }
   },
+
+  /**
+   * Get document types
+   * @return {Object} list of document types
+   */
+  async getDocumentTypes() {
+    try {
+      const url = `${configPath}/DocumentType`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching document types:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Get mobile country codes
+   * @return {Object} list of mobile country codes
+   */
+  async getMobileCountryCodes() {
+    try {
+      const url = `${configPath}/MobileCountryCode`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching mobile country codes:', error);
+      throw error;
+    }
+  },
+  /**
+   * Get mobile country codes
+   * @return {Object} list of mobile country codes
+   */
+  async getNationalityTypes() {
+    try {
+      const url = `${configPath}/Nationality`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching mobile country codes:', error);
+      throw error;
+    }
+  },
+
+
+  /**
+   * Get mobile country codes
+   * @return {Object} list of mobile country codes
+   */
+  async getOccupationTypes() {
+    try {
+      const url = `${configPath}/Occupation`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching mobile country codes:', error);
+      throw error;
+    }
+  },
+   /**
+   * Get mobile country codes
+   * @return {Object} list of mobile country codes
+   */
+  async getRelationshipTypes() {
+    try {
+      const url = `${configPath}/Relationship`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'api-version': '1.0',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching mobile country codes:', error);
+      throw error;
+    }
+  },
 };
+
+

@@ -17,17 +17,20 @@
 <div class="form-group row">
   <!-- Dropdown (Select) in col-4 with dropdown icon inside input -->
   <div class="col-4">
-    <label class="mb-1" for="document-type">Document No.<span class="red">*</span></label>
+    <label class="mb-1" for="document-type">
+      Document No.<span class="red">*</span>
+    </label>
     <div class="position-relative">
       <!-- Input Field -->
-       <input
-    id="document-type"
-    v-model="selectedOption"
-   tabIndex="44" 
-    placeholder="HKID"
-    readonly
-    :disabled="formMode === 'edit' && formFieldsDisabled"
-  />
+      <input
+        id="document-type"
+        v-model="selectedDocumentDescription"
+        tabIndex="44"
+        placeholder="HKID"
+        readonly
+        :disabled="formMode === 'edit' && formFieldsDisabled"
+           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+      />
       <!-- Dropdown Icon -->
       <span
         class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
@@ -42,11 +45,13 @@
         style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
       >
         <div
+          v-for="type in documentTypes"
+          :key="type.id"
           class="dropdown-item"
           style="padding: 8px; cursor: pointer;"
-          @click="selectOption('HKID')"
+          @click="selectOption(type)"
         >
-          HKID
+          {{ type.description }}
         </div>
       </div>
     </div>
@@ -64,6 +69,7 @@
       tabIndex="43" 
         :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
         :disabled="formMode === 'edit' && formFieldsDisabled"
+         @input="isFieldInvalid = false"  
     />
     <!-- Cross Icon inside Input -->
     <span 
@@ -87,6 +93,7 @@
       tabIndex="42" 
        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
       :disabled="formMode === 'edit' && formFieldsDisabled"
+          @input="isFieldInvalid = false" 
        
     />
      <!-- Cross Icon inside Input -->
@@ -110,6 +117,7 @@
     tabIndex="41" 
       :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
       :disabled="formMode === 'edit' && formFieldsDisabled"
+          @input="isFieldInvalid = false" 
   />
   <!-- Cross Icon inside Input -->
   <span 
@@ -209,36 +217,93 @@
     />
   </div>
 
-  <div class="col-6">
-    <label for="occupation">Occupation</label>
-    <input 
-      id="occupation" 
-      v-model="form.occupation" 
-      type="text" 
-      class="form-control" 
-      placeholder="Free Text"
-      tabIndex="36" 
-       :disabled="formMode === 'edit' && formFieldsDisabled"
-    />
-    
-  </div>
+ <div class="col-6 px-3" style="padding: 0;">
+      <label class="mb-1" for="occupation">
+        Occupation<span class="red">*</span>
+      </label>
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="occupation"
+          v-model="selectedOccupationDescription"
+          class="form-control pr-5"
+          placeholder="Free Text"
+          tabIndex="36"
+          readonly
+          :disabled="formMode === 'edit' && formFieldsDisabled"
+             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleOccupationDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isOccupationDropdownOpen"
+          class="dropdown-menu position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="type in occupationTypes"
+            :key="type.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectOccupation(type)"
+          >
+            {{ type.description }}
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 
 
 <div class="form-group" style="display: flex; gap: 10px;">
-  <div class="col-6 ps-0">
-    <label for="nationality">Nationality</label>
-    <input 
-      id="nationality" 
-      v-model="form.nationalityId" 
-      type="text" 
-      class="form-control" 
-      placeholder="Nationality"
-      tabIndex="35" 
-       :disabled="formMode === 'edit' && formFieldsDisabled"
-    />
-  </div>
+   <div class="col-6" style="padding: 0;">
+      <label class="mb-1" for="nationality">
+        Nationality<span class="red">*</span>
+      </label>
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="nationality"
+          v-model="selectedNationalityDescription"
+          class="form-control pr-5"
+          placeholder="Nationality"
+          tabIndex="35"
+          readonly
+          :disabled="formMode === 'edit' && formFieldsDisabled"
+             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleNationalityDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isNationalityDropdownOpen"
+          class="dropdown-menu position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="type in nationalityTypes"
+            :key="type.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectNationality(type)"
+          >
+            {{ type.description }}
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div class="col-6 position-relative">
     <label for="prNO">PR No.</label>
@@ -263,26 +328,48 @@
 
 <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
   <div class="col-6 d-flex " style="padding:0px; margin-top: -16px;">
-    <div class="col-4" style="padding:0px;">
-  <label class="mb-1" for="document-type">Mobile<span class="red">*</span></label>
-  <div class="position-relative">
-    <input
-  id="mobile-no"
-  value="+852"
-  class="form-control pr-5"
-  placeholder="+852"
-  tabIndex="33" 
-  :disabled="formMode === 'edit' && formFieldsDisabled"
-  
-  
-/>
-
-    <!-- Dropdown Icon inside Input -->
-    <span class="position-absolute top-50 end-0 translate-middle-y cursor-pointer">
-      &#9662; <!-- Downward arrow (you can use an icon here) -->
-    </span>
-  </div>
-</div>
+     <!-- Mobile Country Code Dropdown -->
+    <div class="col-4" style="padding: 0;">
+      <label class="mb-1" for="mobile-no">
+        Mobile<span class="red">*</span>
+      </label>
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="mobile-no"
+          v-model="selectedMobileCodeDescription"
+          class="form-control pr-5"
+          placeholder="+852"
+          tabIndex="33"
+          readonly
+          :disabled="formMode === 'edit' && formFieldsDisabled"
+             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleMobileCodeDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isMobileCodeDropdownOpen"
+          class="dropdown-menu position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="code in mobileCountryCodes"
+            :key="code.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectMobileCode(code)"
+          >
+            {{ code.description }}
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- Input Text in col-8 with flex -->
   <div class="col-8 p-0 d-flex position-relative">
@@ -404,7 +491,7 @@
     <input 
       id="email" 
       v-model="form.email" 
-      type="text" 
+      type="email" 
       class="form-control" 
       placeholder="Free Text"
       tabIndex="28" 
@@ -511,6 +598,7 @@
       class="form-check-input me-2" 
       tabIndex="23" 
       :disabled="formMode === 'edit' && formFieldsDisabled"
+      
     />
     <label for="refuseSms" class="form-check-label">Refuse SMS</label>
   </div>
@@ -564,19 +652,45 @@
       &times;
     </span>
     </div>
-    <div class="form-group mb-2">
-   
-      <input 
-        id="kin1-relation" 
-        v-model="form.nextOfKin1RelationshipId" 
-        type="text" 
-        class="form-control" 
-        placeholder="Relationship"
-        tabIndex="21" 
-          :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+    <div class="mb-2" style="padding: 0;">
+ 
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="kin1-relation"
+          v-model="selectedRelationshipDescription"
+          class="form-control pr-5"
+          placeholder="Relationship"
+          tabIndex="21"
+          readonly
           :disabled="formMode === 'edit' && formFieldsDisabled"
-         
-      />
+           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleRelationshipDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isRelationshipDropdownOpen"
+          class="dropdown-menu-1 position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="type in relationshipTypes"
+            :key="type.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectRelationship(type)"
+          >
+            {{ type.description }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group mb-2 position-relative">
   
@@ -661,19 +775,43 @@
       &times;
     </span>
     </div>
-     <div class="form-group mb-2">
-  
-      <input 
-        id="kin2-relation" 
-        v-model="form.nextOfKin2RelationshipId" 
-        type="text" 
-        class="form-control" 
-        placeholder="Relationship"
-
-        tabIndex="16" 
-        :disabled="formMode === 'edit' && formFieldsDisabled"
-         
-      />
+   <div class="mb-2" style="padding: 0;">
+ 
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="kin1-relation"
+          v-model="selectedKin2RelationshipDescription"
+          class="form-control pr-5"
+          placeholder="Relationship"
+          tabIndex="16"
+          readonly
+          :disabled="formMode === 'edit' && formFieldsDisabled"
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleKin2RelationshipDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isKin2RelationshipDropdownOpen"
+          class="dropdown-menu-2 position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="type in relationshipKin2Types"
+            :key="type.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectKin2Relationship(type)"
+          >
+            {{ type.description }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group mb-2 position-relative">
       
@@ -754,17 +892,43 @@
       &times;
     </span>
     </div>
-      <div class="form-group mb-2">
-      
-      <input 
-        id="kin3-relation" 
-        v-model="form.nextOfKin3RelationshipId" 
-        type="text" 
-        class="form-control" 
-        placeholder="Relationship"
-        tabIndex="11" 
-         :disabled="formMode === 'edit' && formFieldsDisabled"
-      />
+   <div class="mb-2" style="padding: 0;">
+ 
+      <div class="position-relative">
+        <!-- Input Field -->
+        <input
+          id="kin1-relation"
+          v-model="selectedKin3RelationshipDescription"
+          class="form-control pr-5"
+          placeholder="Relationship"
+          tabIndex="11"
+          readonly
+          :disabled="formMode === 'edit' && formFieldsDisabled"
+        />
+        <!-- Dropdown Icon -->
+        <span
+          class="position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+          @click="toggleKin3RelationshipDropdown"
+        >
+          &#9662; <!-- Downward arrow -->
+        </span>
+        <!-- Dropdown Menu -->
+        <div
+          v-show="isKin3RelationshipDropdownOpen"
+          class="dropdown-menu-3 position-absolute"
+          style="top: 100%; right: 0; z-index: 1; background: white; border: 1px solid #ccc; border-radius: 4px; min-width: 100%;"
+        >
+          <div
+            v-for="type in relationshipKin3Types"
+            :key="type.id"
+            class="dropdown-item"
+            style="padding: 8px; cursor: pointer;"
+            @click="selectKin3Relationship(type)"
+          >
+            {{ type.description }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group mb-2 position-relative">
      
@@ -914,28 +1078,72 @@
     </div>
   </div>
 </div>
-<!-- Toast Container -->
+<!-- Toast Container with Modal Overlay -->
+<!-- Toast Container with Modal Overlay -->
 <div
   v-if="showToast"
-  class="toast-container position-fixed bottom-0 end-0 p-3"
+  class="modal-overlay position-fixed d-flex justify-content-center align-items-center"
   aria-live="polite"
   aria-atomic="true"
-  style="z-index: 1050;"
+  style="z-index: 1050; background: rgba(0, 0, 0, 0.5);"
 >
   <div
-    class="toast align-items-center text-bg-success border-0"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
+    class="modal-dialog modal-dialog-centered"
+    style="
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    "
   >
-    <div class="d-flex">
-      <div class="toast-body">
-        Profile updated successfully!
+    <div
+      class="card border-0 shadow rounded-xl"
+      style="background: white;"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex flex-column align-items-center">
+        <!-- Heading -->
+        <div class="toast-header border-0 py-3 d-flex justify-start w-100">
+          <h5
+            class="m-0"
+            :class="toastType === 'success' ? 'text-primary' : 'text-danger'"
+            style="flex-grow: 1; font-size: 16px;"
+          >
+            {{ toastHeading }}
+          </h5>
+        </div>
+        <!-- Text Content -->
+        <div
+          class="toast-body py-2 px-3 text-center" style="font-size: 14px;"
+          :class="toastType === 'success' ? 'text-primary' : 'text-danger'"
+        >
+          <p class="mb-0">{{ toastMessage }}</p>
+        </div>
       </div>
-      <button type="button" class="btn-close btn-close-white ms-2 m-auto" @click="closeToast"></button>
+      <!-- Blue Timer Line -->
+      <div
+        class="timer-line"
+        style="
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 4px;
+          background: #007bff;
+          animation: timer 3s linear forwards;
+        "
+      ></div>
     </div>
   </div>
 </div>
+
+
+
+
 
             <!-- Button Section -->
 <div class="form-group d-flex justify-end">
@@ -988,7 +1196,36 @@ export default {
   },
   data() {
     return {
-          showToast: false, // Controls toast visibility
+      
+       toastMessage: '',
+      toastHeading: '',
+      toastType: '',
+        selectedMobileCode: '+852',
+          selectedNationality: '',
+           selectedOccupation: '',
+            selectedRelationship: '',
+            selectedKin2Relationship: '',
+                selectedKin3Relationship: '',
+        mobileCountryCodes: [
+        { id: 1, code: '+852' },
+        { id: 2, code: '+1' },
+        { id: 3, code: '+44' },
+        { id: 4, code: '+91' },
+      ],
+        nationalityTypes: [],
+        occupationTypes: [],
+         relationshipTypes: [],
+          relationshipKin2Types: [],
+            relationshipKin3Types: [],
+      isMobileCodeDropdownOpen: false,
+        isNationalityDropdownOpen: false,
+         isOccupationDropdownOpen: false,
+         isRelationshipDropdownOpen: false,
+         isKin2RelationshipDropdownOpen: false,
+          isKin3RelationshipDropdownOpen: false,
+        documentTypes: [], 
+          showToast: false, 
+          showUpdatedToast: false,// Controls toast visibility
     toastTimeout: null,
       showConfirmationPopup: false,
           isFieldInvalid: false,
@@ -1067,6 +1304,13 @@ export default {
     
   },
   computed: {
+     // Dynamic styles based on toast type
+    toastStyle() {
+      return this.toastType === 'error' ? { backgroundColor: 'rgba(255, 0, 0, 0.8)' } : { backgroundColor: 'rgba(0, 123, 255, 0.8)' };
+    },
+    toastHeadingClass() {
+      return this.toastType === 'error' ? 'text-danger' : 'text-primary';
+    },
   formattedPatientAddress() {
   // Check if any of the resident structure address fields are available
   return [
@@ -1102,8 +1346,88 @@ formattedMailingAddress() {
 }
 
 },
+  mounted() {
+    // Fetch document types when the component is mounted
+    this.fetchDocumentTypes();
+    this.fetchMobileCodes();
+    this.fetchNationalityTypes();
+    this.fetchOccuptionTypes();
+    this.fetchRelationshipTypes();
+    this.fetchKin2RelationshipTypes();
+    this.fetchKin3RelationshipTypes();
+  },
 
   methods: {
+    // Show a toast message with a dynamic heading and message
+    showDynamicToast(type, heading, message) {
+      this.toastType = type; // Set the toast type (success or error)
+      this.toastHeading = heading; // Set the toast heading
+      this.toastMessage = message; // Set the toast message
+      this.showToast = true;
+
+      // Hide the toast after a delay
+      setTimeout(() => {
+        this.showToast = false;
+      }, 3500); // 3.5 seconds
+    },
+  
+    // Fetch document types using the function from patient.js
+    async fetchDocumentTypes() {
+      try {
+        const data = await patientService.getDocumentTypes();
+        this.documentTypes = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+      async fetchMobileCodes() {
+      try {
+        const data = await patientService.getMobileCountryCodes();
+        this.mobileCountryCodes = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+    async fetchNationalityTypes() {
+      try {
+        const data = await patientService.getNationalityTypes();
+        this.nationalityTypes = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+     async fetchOccuptionTypes() {
+      try {
+        const data = await patientService.getOccupationTypes();
+        this.occupationTypes = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+     async fetchRelationshipTypes() {
+      try {
+        const data = await patientService.getRelationshipTypes();
+        this.relationshipTypes = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+    async fetchKin2RelationshipTypes() {
+      try {
+        const data = await patientService.getRelationshipTypes();
+        this.relationshipKin2Types = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
+    async fetchKin3RelationshipTypes() {
+      try {
+        const data = await patientService.getRelationshipTypes();
+        this.relationshipKin3Types = data;
+      } catch (error) {
+        console.error('Error fetching document types:', error);
+      }
+    },
     closeForm() {
       this.isModalOpen = false;
       this.$emit('close');
@@ -1114,50 +1438,144 @@ formattedMailingAddress() {
     closeAddressModal() {
       this.isAddressModalOpen = false;
     },
+selectMobileCode(code) {
+  this.selectedMobileCode = code;
+  this.formData.mobileCountryCodeId = code.id;  // Set the mobileCountryCodeId to the code's id
+  
+  // Store the description for display purposes
+  this.selectedMobileCodeDescription = code.description; // Update the description (assuming code has a description)
+  this.isMobileCodeDropdownOpen = false;
+},
 
+selectNationality(type) {
+  this.selectedNationality = type;
+  this.formData.nationalityId = type.id;  // Set the nationalityId to the type's id
+  
+  // Store the description for display purposes
+  this.selectedNationalityDescription = type.description; // Update the description (assuming type has a description)
+  this.isNationalityDropdownOpen = false;
+},
+
+selectOccupation(type) {
+  this.selectedOccupation = type;
+  
+  // Store the description for display purposes
+  this.selectedOccupationDescription = type.description; // Update the description (assuming type has a description)
+  this.isOccupationDropdownOpen = false;
+},
+
+selectRelationship(type) {
+  this.selectedRelationship = type;
+  this.formData.nextOfKin1RelationshipId = type.id;  // Set the nextOfKin1RelationshipId to the type's id
+  
+  // Store the description for display purposes
+  this.selectedRelationshipDescription = type.description; // Update the description (assuming type has a description)
+  this.isRelationshipDropdownOpen = false;
+},
+
+selectKin2Relationship(type) {
+  this.selectedKin2Relationship = type;
+  this.formData.nextOfKin2RelationshipId = type.id;  // Set the nextOfKin2RelationshipId to the type's id
+  
+  // Store the description for display purposes
+  this.selectedKin2RelationshipDescription = type.description; // Update the description (assuming type has a description)
+  this.isKin2RelationshipDropdownOpen = false;
+},
+
+selectKin3Relationship(type) {
+  this.selectedKin3Relationship = type;
+  this.formData.nextOfKin3RelationshipId = type.id;  // Set the nextOfKin3RelationshipId to the type's id
+  
+  // Store the description for display purposes
+  this.selectedKin3RelationshipDescription = type.description; // Update the description (assuming type has a description)
+  this.isKin3RelationshipDropdownOpen = false;
+}
+,
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
-    selectOption(option) {
-      this.selectedOption = option;
+     // Toggle MobileCode dropdown visibility
+    toggleMobileCodeDropdown() {
+      this.isMobileCodeDropdownOpen = !this.isMobileCodeDropdownOpen;
+   
+    },
+     toggleNationalityDropdown() {
+      this.isNationalityDropdownOpen = !this.isNationalityDropdownOpen;
+   
+    },
+     toggleOccupationDropdown() {
+      this.isOccupationDropdownOpen = !this.isOccupationDropdownOpen;
+   
+    },
+     toggleRelationshipDropdown() {
+      this.isRelationshipDropdownOpen = !this.isRelationshipDropdownOpen;
+   
+    },
+    toggleKin2RelationshipDropdown() {
+      this.isKin2RelationshipDropdownOpen = !this.isKin2RelationshipDropdownOpen;
+   
+    },
+     toggleKin3RelationshipDropdown() {
+      this.isKin3RelationshipDropdownOpen = !this.isKin3RelationshipDropdownOpen;
+   
+    },
+    
+    selectOption(type) {
+      this.selectedOption = type;
+        this.formData.documentTypeId = type.id;
+
+    // Optionally store the description for display purposes
+    this.selectedDocumentDescription = type.description;
       this.isDropdownOpen = false;
     },
      saveAddress(updatedAddress) {
       this.address = updatedAddress;
       this.isAddressModalOpen = false;
     },
-   validateField() {
-  this.isFieldInvalid = 
-    // Check surname
-    (this.form.surname && typeof this.form.surname === 'string' && this.form.surname.trim() === '') ||
-    // Check document
-    (this.form.documentNumber && typeof this.form.documentNumber === 'string' && this.form.documentNumber.trim() === '') ||
-    // Check given name
-    (this.form.giveName && typeof this.form.giveName === 'string' && this.form.giveName.trim() === '') ||
-    // Check sex
-    (this.form.sex && typeof this.form.sex === 'string' && this.form.sex.trim() === '') ||
-    // Check mobile number
-    (this.form.mobileNumber && typeof this.form.mobileNumber === 'string' && this.form.mobileNumber.trim() === '') ||
-    // Check parent address
-    (this.form.formattedPatientAddress && typeof this.formattedPatientAddress === 'string' && this.form.formattedPatientAddress.trim() === '') ||
-    // Check mailing address
-    (this.form.formattedMailingAddress && typeof this.formattedMailingAddress === 'string' && this.form.mailingAddress.trim() === '') ||
-    // Check SMS language
-    (this.form.smsLanguage && typeof this.form.smsLanguage === 'string' && this.form.smsLanguage.trim() === '') ||
-    // Check next of kin 1
-    (this.form.nextOfKin1Name && typeof this.form.nextOfKin1Name === 'string' && this.form.nextOfKin1Name.trim() === '') || 
-    (this.form.nextOfKin1Name && typeof this.form.nextOfKin1Name === 'string' && this.form.nextOfKin1Name.trim() === '') ||
-     (this.form.nextOfKin1RelationshipId && typeof this.form.nextOfKin1RelationshipId === 'string' && this.form.nextOfKin1RelationshipId.trim() === '') ||
-          (this.form.nextOfKin1ContactNumber && typeof this.form.nextOfKin1ContactNumber === 'string' && this.form.nextOfKin1ContactNumber.trim() === '') ||
-            (this.form.dateOfBirth && typeof this.form.dateOfBirth === 'string' && this.form.dateOfBirth.trim() === '') ;
+validateField() {
+  // Initialize isFieldInvalid as false for all fields
+  this.isFieldInvalid = false;
 
-  // Additional check for any missing fields
-  if (!this.form.surname || !this.form.documentNumber || !this.form.giveName || !this.form.sex || !this.form.mobileNumber ||
-      !this.formattedPatientAddress || !this.formattedMailingAddress|| !this.form.smsLanguage || !this.form.nextOfKin1Name || !this.form.nextOfKin1RelationshipId || !this.form.nextOfKin1ContactNumber || !this.form.dateOfBirth)  {
-    this.isFieldInvalid = true;
+  // Define all the form fields that need to be validated
+  const requiredFields = [
+    'surname',
+    'documentNumber',
+    'givenName',
+    'sex',
+    'mobileNumber',
+    'smsLanguage',
+    'nextOfKin1Name',
+    'nextOfKin1ContactNumber',
+    'dateOfBirth'
+  ];
+
+  // // Define the address fields if they are in a nested object (adjust as necessary)
+  // const addressFields = [
+  //   'formattedPatientAddress',
+  //   'formattedMailingAddress'
+  // ];
+
+  // Combine all fields to check
+  const allFields = [...requiredFields];
+
+  // Loop through the fields and check if any is invalid
+  for (const field of allFields) {
+    const fieldValue = this.form[field];
+    if (!fieldValue || fieldValue.trim() === '') {
+      this.isFieldInvalid = true;
+      console.log(`${field} is invalid`);
+      break; // Exit loop once invalid field is found
+    }
   }
-},
- // Method to cancel the form and show confirmation popup
+
+  if (this.isFieldInvalid) {
+    console.log('Form validation failed.');
+  }
+}
+
+
+,
+ // Method to cancel the form and show confirmation popup≈
   confirmCancel() {
     if (this.isEditing) {
       this.showConfirmationPopup = true; // Show the confirmation dialog when editing
@@ -1181,8 +1599,17 @@ formattedMailingAddress() {
     // Automatically hide the toast after 3 seconds
     this.toastTimeout = setTimeout(() => {
       this.closeToast();
-    }, 3000);
+    }, 1000);
   },
+  showUpdatedSuccessToast() {
+    this.showUpdatedToast = true;
+
+    // Automatically hide the toast after 3 seconds
+    this.toastTimeout = setTimeout(() => {
+      this.closeUpdatedToast();
+    }, 1000);
+  },
+
 
   // Close the toast and clear the timer
   closeToast() {
@@ -1194,17 +1621,45 @@ formattedMailingAddress() {
       this.toastTimeout = null;
     }
   },
+  
+  closeUpdatedToast() {
+    this.showUpdatedToast = false;
+
+    // Clear the timeout to prevent any pending timer issues
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+      this.toastTimeout = null;
+    }
+  },
+
+
+ 
+
 
 async submitForm() {
   try {
+    this.isFieldInvalid = false;
+
     // Validate fields for 'create' mode
     if (this.formMode === 'create') {
       this.validateField();
 
       if (this.isFieldInvalid) {
+        console.log('Form validation failed.');
         return; // If the fields are invalid, don't proceed
       }
     }
+    
+    const payload = {
+      ...this.flattenPayload(this.form),
+      ...this.flattenPayload(this.address),
+      documentTypeId: this.formData.documentTypeId,
+      mobileCountryCodeId: this.formData.mobileCountryCodeId,  // Include mobile country code ID
+      nationalityId: this.formData.nationalityId,  // Include nationality ID
+      nextOfKin1RelationshipId: this.formData.nextOfKin1RelationshipId,  // Include relationship ID
+    };
+
+    let response;
 
     // Handle data submission for 'edit' mode
     if (this.formMode === 'edit') {
@@ -1213,32 +1668,76 @@ async submitForm() {
 
       const updatedPatientData = {
         ...patientData,
-        ...this.flattenPayload(this.form),
-        ...this.flattenPayload(this.address),
+        ...payload, // Include the updated payload with IDs
       };
 
-      const response = await patientService.editPatient(patientId, updatedPatientData);
-      console.log('Patient updated successfully:', response);
-
-      // Show success toast after edit API success
-      this.showSuccessToast();
+      response = await patientService.editPatient(patientId, updatedPatientData);
     } else if (this.formMode === 'create') {
       // Create new patient data
-      const patientData = {
-        ...this.flattenPayload(this.form),
-        ...this.flattenPayload(this.address),
-      };
+      response = await patientService.createPatient(payload);
+    }
 
-      const response = await patientService.createPatient(patientData);
-      console.log('Patient created successfully:', response);
-
-      // Show success toast after create API success
-      this.showSuccessToast();
+    // If response is null or undefined, show success toast as fallback
+    if (!response) {
+      console.error('Response is null or undefined, showing default success toast');
+      this.showDynamicToast(
+        'success',
+        this.formMode === 'create' ? 'Patient Created' : 'Patient Profile Updated',
+        this.formMode === 'create' ? 'Patient is created successfully!' : 'Patient profile has been updated.',
+        
+      );
+      // Close the modal after a short delay (e.g., 500ms)
+  setTimeout(() => {
+   this.closeForm();
+  }, 3000);
+    } else {
+      // Handle different status codes with dynamic messages from the response
+      if (response.status === 204 || response.status === 200) {
+        console.log('Patient saved successfully');
+        const successMessage = response.body?.message || 'Operation was successful.';
+        this.closeForm();
+        this.isModalOpen = false;
+        this.showDynamicToast(
+          'success',
+          this.formMode === 'create' ? 'Patient Created' : 'Patient Profile Updated',
+          successMessage
+        );
+      } else if (response.status === 422) {
+        // Handle the specific 422 status code for duplicate document number
+        const errorMessage = response.body?.message || 'This patient was already registered.';
+        console.error('Duplicate document number:', errorMessage);
+        this.showDynamicToast(
+          'error',
+          'Duplicate Document Number',
+          errorMessage
+        );
+      } else {
+        // Handle unexpected response statuses and display dynamic error message
+        const errorMessage = response.body?.message || 'Duplicate document number! This patient was already registered';
+        console.error('Unexpected response:', response);
+        this.showDynamicToast(
+          'error',
+          'Error',
+          errorMessage,
+           'Duplicate document number! This patient was already registered'
+        );
+      }
     }
   } catch (error) {
     console.error('Error submitting form:', error);
+    // Show error toast on failure
+    this.showDynamicToast(
+      'error',
+      'Error',
+      'Duplicate document number! This patient was already registered'
+    );
   }
-},
+}
+,
+
+
+
+
 
 
   // Method to enable editing mode (unlock fields)
@@ -1404,6 +1903,38 @@ h6{
   color: white;
 }
 
+.dropdown-menu-1{
+      top: 41% !important;
+    right: 530px !important;
+    z-index: 1;
+    border-radius: 4px;
+    min-width: 0% !important;
+    position: fixed !important;
+    overflow-y: scroll;
+    height: 100px;
 
+}
+.dropdown-menu-2{
+      top: 41% !important;
+    right: 530px !important;
+    z-index: 1;
+    border-radius: 4px;
+    min-width: 0% !important;
+    position: fixed !important;
+    overflow-y: scroll;
+    height: 100px;
+
+}
+.dropdown-menu-3{
+      top: 41% !important;
+    right: 530px !important;
+    z-index: 1;
+    border-radius: 4px;
+    min-width: 0% !important;
+    position: fixed !important;
+    overflow-y: scroll;
+    height: 100px;
+
+}
 </style>
 
