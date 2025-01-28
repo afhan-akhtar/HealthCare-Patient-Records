@@ -28,8 +28,9 @@
         tabIndex="44"
         placeholder="HKID"
         readonly
-        :disabled="formMode === 'edit' && formFieldsDisabled"
-           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :disabled="formMode === 'edit' &&  formFieldsDisabled "
+           :class="['form-control pr-5', { 'border-red': fieldErrors.selectedDocumentDescription }]"
+           @input="fieldErrors.selectedDocumentDescription"
       />
       <!-- Dropdown Icon -->
       <span
@@ -67,14 +68,14 @@
       class="form-control pr-5" 
       placeholder="Document No"
       tabIndex="43" 
-        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :class="['form-control pr-5', { 'border-red': fieldErrors.documentNumber }]"
         :disabled="formMode === 'edit' && formFieldsDisabled"
-         @input="isFieldInvalid = false"  
+         @input="fieldErrors.documentNumber = false"  
     />
     <!-- Cross Icon inside Input -->
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-    
+        @click="clearInput('documentNumber')"
     >
       &times;
     </span>
@@ -91,15 +92,15 @@
       class="form-control" 
       placeholder="Surname"
       tabIndex="42" 
-       :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+       :class="['form-control pr-5', { 'border-red': fieldErrors.surname }]"
       :disabled="formMode === 'edit' && formFieldsDisabled"
-          @input="isFieldInvalid = false" 
+          @input="fieldErrors.surname = false"
        
     />
      <!-- Cross Icon inside Input -->
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('surname')"
     >
       &times;
     </span>
@@ -115,13 +116,14 @@
     class="form-control" 
     placeholder="Given Name"
     tabIndex="41" 
-      :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+      :class="['form-control pr-5', { 'border-red': fieldErrors.givenName }]"
       :disabled="formMode === 'edit' && formFieldsDisabled"
-          @input="isFieldInvalid = false" 
+          @input="fieldErrors.givenName = false" 
   />
   <!-- Cross Icon inside Input -->
   <span 
     class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
+        @click="clearInput('givenName')"
   >
     &times;
   </span>
@@ -143,7 +145,7 @@
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('chineseName')"
     >
       &times;
     </span>
@@ -151,52 +153,54 @@
 
  <div class="col-6">
   <label for="sex">Sex<span class="red">*</span></label>
-  <div class="tabs" style="display: flex; gap: 10px;">
- <label
-  tabIndex="39"
-  style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
-  :class="[
-    'form-control pr-5 tab-option',
-    { 
-      'border-red': isFieldInvalid, 
-      'active': form.sex === 'Male' || form.sex === 'Female'
-      
-    }
-  ]"
->
-
-
+ <div class="tabs" style="display: flex; gap: 10px;">
+  <!-- Male Tab -->
+  <label
+    tabIndex="39"
+    style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
+    :class="[
+      'form-control pr-5 tab-option',
+      { 
+        'border-red': fieldErrors.sex, 
+        'active': form.sex === 'Male'
+      }
+    ]"
+  >
     <input 
       v-model="form.sex" 
       type="radio" 
       value="Male" 
       style="display: none;" 
       :disabled="formMode === 'edit' && formFieldsDisabled"
+        @change="fieldErrors.sex = false"
     />
     Male
   </label>
+
+  <!-- Female Tab -->
   <label
-  tabIndex="38"
-  style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
-  :class="[
-    'form-control pr-5 tab-option',
-    { 
-      'border-red': isFieldInvalid, 
-      'active': form.sex === 'Female' 
-      
-    }
-  ]"
->
+    tabIndex="38"
+    style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
+    :class="[
+      'form-control pr-5 tab-option',
+      { 
+        'border-red': fieldErrors.sex, 
+        'active': form.sex === 'Female'
+      }
+    ]"
+  >
     <input 
       v-model="form.sex" 
       type="radio" 
       value="Female" 
       style="display: none;" 
       :disabled="formMode === 'edit' && formFieldsDisabled"
+        @change="fieldErrors.sex = false"
     />
     Female
   </label>
 </div>
+
 </div>
 </div>
 
@@ -210,8 +214,10 @@
       class="form-control pe-2" 
       placeholder="DD/M/YYYY"
       tabIndex="37" 
-       :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+       :class="['form-control pr-5', { 'border-red': fieldErrors.dateOfBirth }]"
        :disabled="formMode === 'edit' && formFieldsDisabled"
+       @change="fieldErrors.dateOfBirth = false"
+        @input="fieldErrors.dateOfBirth = false" 
       
        
     />
@@ -276,8 +282,8 @@
           placeholder="Nationality"
           tabIndex="35"
           readonly
-          :disabled="formMode === 'edit' && formFieldsDisabled"
-             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :disabled="formMode === 'edit' && formFieldsDisabled  "
+             :class="['form-control pr-5', { 'border-red': fieldErrors.selectedNationalityDescription }]"
         />
         <!-- Dropdown Icon -->
         <span
@@ -318,7 +324,7 @@
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('prNumber')"
     >
       &times;
     </span>
@@ -342,8 +348,8 @@
           placeholder="+852"
           tabIndex="33"
           readonly
-          :disabled="formMode === 'edit' && formFieldsDisabled"
-             :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :disabled="formMode === 'edit' && formFieldsDisabled "
+             :class="['form-control pr-5', { 'border-red': fieldErrors.selectedMobileCodeDescription }]"
         />
         <!-- Dropdown Icon -->
         <span
@@ -381,14 +387,15 @@
       class="form-control pr-5" 
       placeholder="Free Text"
       tabIndex="32" 
-        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :class="['form-control pr-5', { 'border-red': fieldErrors.mobileNumber }]"
         :disabled="formMode === 'edit' && formFieldsDisabled"
+        @input="fieldErrors.mobileNumber = false"
       
     />
     <!-- Cross Icon inside Input -->
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-    
+        @click="clearInput('mobileNumber')"
     >
       &times;
     </span>
@@ -408,7 +415,7 @@
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('homeTelNo')"
     >
       &times;
     </span>
@@ -441,12 +448,14 @@
     <label for="patientAddress">Patient Address<span class="red">*</span></label>
     <textarea 
       id="patientAddress" 
-    :value="formattedPatientAddress"
+    v-model="formattedPatientAddress"
       class="form-control" 
       placeholder="Empty"
-        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+        :class="['form-control pr-5', { 'border-red': fieldErrors.formattedPatientAddress }]"
        :disabled="formMode === 'edit' && formFieldsDisabled"
-      style="width: 100%; height: 150px;" 
+       style="width: 100%; height: 150px;"
+       @input="fieldErrors.formattedPatientAddress = false"
+     
     ></textarea>
   </div>
 
@@ -455,12 +464,13 @@
     <textarea 
       id="mailingAddress" 
        
-      class="form-control" 
-      placeholder="Empty"
-        :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
-       :disabled="formMode === 'edit' && formFieldsDisabled"
-      style="width: 100%; height: 150px;" 
-            :value="formattedMailingAddress"
+      v-model="formattedMailingAddress" 
+      class="form-control"
+        placeholder="Empty"
+        :class="['form-control pr-5', { 'border-red': fieldErrors.formattedMailingAddress }]"
+      :disabled="formMode === 'edit' && formFieldsDisabled" 
+            style="width: 100%; height: 150px;"
+            @input="fieldErrors.formattedMailingAddress = false"
     ></textarea>
   </div>
 </div>
@@ -480,7 +490,7 @@
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('remark')"
     >
       &times;
     </span>
@@ -499,7 +509,7 @@
     />
     <span 
       class="closed-btn position-absolute top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('email')"
     >
       &times;
     </span>
@@ -558,7 +568,7 @@
   style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
   :class="[
     'form-control pr-5 tab-option',
-    { 'border-red': isFieldInvalid, 'active': form.smsLanguage === 'Eng' }
+    { 'border-red': fieldErrors.smsLanguage, 'active': form.smsLanguage === 'Eng' }
   ]"
 >
     <input 
@@ -567,6 +577,7 @@
       value="Eng" 
       :disabled="formMode === 'edit' && formFieldsDisabled"
       style="display: none;" 
+      @change="fieldErrors.smsLanguage = false"
     />
     ENG
   </label>
@@ -575,7 +586,7 @@
   style="cursor: pointer; padding: 7px 18px; border: 1px solid #ccc; border-radius: 50px; text-align: center;"
   :class="[
     'form-control pr-5 tab-option',
-    { 'border-red': isFieldInvalid, 'active': form.smsLanguage === 'Chi' }
+    { 'border-red': fieldErrors.smsLanguage, 'active': form.smsLanguage === 'Chi' }
   ]"
 >
     <input 
@@ -584,6 +595,7 @@
       value="Chi" 
       style="display: none;" 
       :disabled="formMode === 'edit' && formFieldsDisabled"
+       @change="fieldErrors.smsLanguage = false"
     />
     CHI
   </label>
@@ -641,13 +653,14 @@
         class="form-control" 
         placeholder="Next of Kin Name"
         tabIndex="22" 
-          :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :class="['form-control pr-5', { 'border-red': fieldErrors.nextOfKin1Name }]"
           :disabled="formMode === 'edit' && formFieldsDisabled"
+          @input="fieldErrors.nextOfKin1Name = false"
          
       />
       <span 
       class="closed-btn position-absolute  cross cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin1Name')"
     >
       &times;
     </span>
@@ -664,7 +677,9 @@
           tabIndex="21"
           readonly
           :disabled="formMode === 'edit' && formFieldsDisabled"
-           :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+           :class="['form-control pr-5', { 'border-red': fieldErrors.selectedRelationshipDescription }]"
+           @input="fieldErrors.selectedRelationshipDescription = false"
+      
           
         />
         <!-- Dropdown Icon -->
@@ -701,13 +716,14 @@
         class="form-control" 
         placeholder="Contact Number"
         tabIndex="20" 
-          :class="['form-control pr-5', { 'border-red': isFieldInvalid }]"
+          :class="['form-control pr-5', { 'border-red': fieldErrors.nextOfKin1ContactNumber }]"
           :disabled="formMode === 'edit' && formFieldsDisabled"
+          @input="fieldErrors.nextOfKin1ContactNumber = false"
          
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin1ContactNumber')"
     >
       &times;
     </span>
@@ -726,7 +742,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin1SmsNumber')"
     >
       &times;
     </span>
@@ -746,7 +762,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin1Remark')"
     >
       &times;
     </span>
@@ -770,7 +786,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin2Name')"
     >
       &times;
     </span>
@@ -826,7 +842,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin2ContactNumber')"
     >
       &times;
     </span>
@@ -845,7 +861,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin2SmsNumber')"
     >
       &times;
     </span>
@@ -864,7 +880,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin2Remark')"
     >
       &times;
     </span>
@@ -887,7 +903,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin3Name')"
     >
       &times;
     </span>
@@ -943,7 +959,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin3ContactNumber')"
     >
       &times;
     </span>
@@ -962,7 +978,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin3SmsNumber')"
     >
       &times;
     </span>
@@ -980,7 +996,7 @@
       />
       <span 
       class="closed-btn position-absolute  cross top-50 end-0 translate-middle-y cursor-pointer"
-  
+      @click="clearInput('nextOfKin3Remark')"
     >
       &times;
     </span>
@@ -1196,7 +1212,7 @@ export default {
   },
   data() {
     return {
-      
+      fieldErrors: {},
        toastMessage: '',
       toastHeading: '',
       toastType: '',
@@ -1533,8 +1549,8 @@ selectKin3Relationship(type) {
       this.isAddressModalOpen = false;
     },
 validateField() {
-  // Initialize isFieldInvalid as false for all fields
-  this.isFieldInvalid = false;
+  // Initialize validation states for all fields
+  this.fieldErrors = {}; // Object to track individual field errors
 
   // Define all the form fields that need to be validated
   const requiredFields = [
@@ -1546,32 +1562,40 @@ validateField() {
     'smsLanguage',
     'nextOfKin1Name',
     'nextOfKin1ContactNumber',
-    'dateOfBirth'
+    'dateOfBirth',
+    'formattedPatientAddress',
+    'formattedMailingAddress'
   ];
 
-  // // Define the address fields if they are in a nested object (adjust as necessary)
-  // const addressFields = [
-  //   'formattedPatientAddress',
-  //   'formattedMailingAddress'
-  // ];
-
-  // Combine all fields to check
-  const allFields = [...requiredFields];
-
-  // Loop through the fields and check if any is invalid
-  for (const field of allFields) {
+  // Validate each field and update `fieldErrors` object
+  for (const field of requiredFields) {
     const fieldValue = this.form[field];
-    if (!fieldValue || fieldValue.trim() === '') {
-      this.isFieldInvalid = true;
-      console.log(`${field} is invalid`);
-      break; // Exit loop once invalid field is found
+    if (field === 'formattedPatientAddress' || field === 'formattedMailingAddress') {
+      // Directly access the computed property instead of calling it as a function
+      const formattedAddress = this[field]; // Now accessing computed property directly
+      if (!formattedAddress.trim()) {
+        this.fieldErrors[field] = true; // Mark field as invalid
+      } else {
+        this.fieldErrors[field] = false; // Mark field as valid
+      }
+    } else {
+      if (!fieldValue || fieldValue.trim() === '') {
+        this.fieldErrors[field] = true; // Mark field as invalid
+      } else {
+        this.fieldErrors[field] = false; // Mark field as valid
+      }
     }
   }
+
+  // Check if any field is invalid
+  this.isFieldInvalid = Object.values(this.fieldErrors).some(error => error);
 
   if (this.isFieldInvalid) {
     console.log('Form validation failed.');
   }
 }
+
+
 
 
 ,
@@ -1640,14 +1664,12 @@ async submitForm() {
   try {
     this.isFieldInvalid = false;
 
-    // Validate fields for 'create' mode
-    if (this.formMode === 'create || edit') {
-      this.validateField();
+    // Validate fields for both 'create' and 'edit' modes
+    this.validateField();
 
-      if (this.isFieldInvalid) {
-        console.log('Form validation failed.');
-        return; // If the fields are invalid, don't proceed
-      }
+    if (this.isFieldInvalid) {
+      console.log('Form validation failed.');
+      return; // If the fields are invalid, don't proceed
     }
     
     const payload = {
@@ -1734,6 +1756,11 @@ async submitForm() {
   }
 }
 ,
+
+ clearInput(field) {
+      this.$set(this.form, field, ''); // Clear the specific field
+      this.$set(this.fieldErrors, field, false); // Optional: clear error state
+    },
 
 
 

@@ -47,7 +47,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressZone')"
     >
       &times;
     </span>
@@ -64,7 +64,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressDistrict')"
     >
       &times;
     </span>
@@ -83,7 +83,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressSubdistrict')"
     >
       &times;
     </span>
@@ -101,7 +101,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressStreet')"
     >
       &times;
     </span>
@@ -119,7 +119,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressVillage')"
     >
       &times;
     </span>
@@ -137,7 +137,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressEstate')"
     >
       &times;
     </span>
@@ -156,7 +156,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressBlock')"
     >
       &times;
     </span>
@@ -176,7 +176,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressFloor')"
     >
       &times;
     </span>
@@ -192,7 +192,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('residentStructureAddressFlat')"
     >
       &times;
     </span>
@@ -217,7 +217,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressZone')"
     >
       &times;
     </span>
@@ -233,7 +233,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressDistrict')"
     >
       &times;
     </span>
@@ -251,7 +251,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressSubdistrict')"
     >
       &times;
     </span>
@@ -269,7 +269,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressStreet')"
     >
       &times;
     </span>
@@ -287,7 +287,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressVillage')"
     >
       &times;
     </span>
@@ -305,7 +305,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressEstate')"
     >
       &times;
     </span>
@@ -323,7 +323,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressBlock')"
     >
       &times;
     </span>
@@ -342,7 +342,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressFloor')"
     >
       &times;
     </span>
@@ -358,7 +358,7 @@
                   />
                   <span 
       class="closed-btn position-absolute   top-50 end-0 translate-middle-y cursor-pointer"
-  
+   @click="clearInput('mailingStructureAddressFlat')"
     >
       &times;
     </span>
@@ -404,9 +404,12 @@ export default {
     submitForm() {
       this.$emit('save', this.address); // Emit the updated address to the parent component
     },
-    
+      clearInput(field) {
+      this.address[field] = ''; // Clears the value of the field
+    },
     
   },
+
 };
 </script>
 
