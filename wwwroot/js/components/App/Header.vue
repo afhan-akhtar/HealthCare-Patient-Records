@@ -16,7 +16,7 @@
     >
       <!-- Logo Section -->
       <div class="logo-container text-center">
-        <img v-if="!isMini" src="/js/assets/icons/tabnext-logo.svg" alt="Logo" />
+        <img v-if="!isMini" src="js/assets/icons/tabnext-logo.svg" alt="Logo" />
       </div>
 
       <div class="logo-container text-center pt-2">
