@@ -431,7 +431,7 @@
   :disabled="formMode === 'edit' && formFieldsDisabled"
   @click="openAddressModal"
 >
-  <img src="js/assets/icons/picture13.svg" alt="Edit Icon" class="me-2" style="width: 18px;" />
+  <img src="js/assets/icons/Picture13.svg" alt="Edit Icon" class="me-2" style="width: 18px;" />
   <span>Edit Address</span>
 </button>
 
@@ -1931,37 +1931,39 @@ h6{
 }
 
 .dropdown-menu-1{
-      top: 41% !important;
-    right: 530px !important;
+      top: 75px !important;
+    right: 27px !important;
     z-index: 1;
     border-radius: 4px;
     min-width: 0% !important;
-    position: fixed !important;
+  
     overflow-y: scroll;
     height: 100px;
 
 }
 .dropdown-menu-2{
-      top: 41% !important;
-    right: 530px !important;
+      top: 75px !important;
+    right: 28px !important;
     z-index: 1;
     border-radius: 4px;
     min-width: 0% !important;
-    position: fixed !important;
+  
     overflow-y: scroll;
     height: 100px;
 
 }
 .dropdown-menu-3{
-      top: 41% !important;
-    right: 530px !important;
+      top: 75px !important;
+    right: 28px !important;
     z-index: 1;
     border-radius: 4px;
     min-width: 0% !important;
-    position: fixed !important;
+  
     overflow-y: scroll;
     height: 100px;
 
 }
+
+
 </style>
 
